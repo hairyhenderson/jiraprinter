@@ -1,3 +1,12 @@
+[![Build Status][circleci-image]][circleci-url]
+[![Code Coverage][coverage-image]][coverage-url]
+[![Code Climate][climate-image]][climate-url]
+[![Dependency Status][gemnasium-image]][gemnasium-url]
+<!-- [![Current Version][npm-image]][npm-url] -->
+
+<!-- [![Stories in Ready][waffle-ready-image]][waffle-url]
+[![Stories In Progress][waffle-progress-image]][waffle-url] -->
+
 # jiraprinter
 
 > _As a JIRA user, I want to be able to print out my current sprint's stories,
@@ -37,3 +46,22 @@ Now, connect with your browser at http://localhost:3000, and when the UI's fully
 [The MIT License](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2015 Dave Henderson
+
+[circleci-image]: https://img.shields.io/circleci/project/hairyhenderson/jiraprinter.svg?style=flat
+[circleci-url]: https://circleci.org/gh/hairyhenderson/jiraprinter
+
+[coverage-image]: https://img.shields.io/codeclimate/coverage/github/hairyhenderson/jiraprinter.svg?style=flat
+[coverage-url]: https://codeclimate.com/github/hairyhenderson/jiraprinter
+
+[climate-image]: https://img.shields.io/codeclimate/github/hairyhenderson/jiraprinter.svg?style=flat
+[climate-url]: https://codeclimate.com/github/hairyhenderson/jiraprinter
+
+[gemnasium-image]: https://img.shields.io/gemnasium/hairyhenderson/jiraprinter.svg?style=flat
+[gemnasium-url]: https://gemnasium.com/hairyhenderson/jiraprinter
+
+[npm-image]: https://img.shields.io/npm/v/jiraprinter.svg?style=flat
+[npm-url]: https://npmjs.org/package/jiraprinter
+
+[waffle-ready-image]: https://badge.waffle.io/hairyhenderson/jiraprinter.svg?label=ready&title=Ready
+[waffle-progress-image]: https://badge.waffle.io/hairyhenderson/jiraprinter.svg?label=in+progress&title=In+Progress
+[waffle-url]: https://waffle.io/hairyhenderson/jiraprinter
