@@ -85,7 +85,15 @@ describe('Stories', function () {
           user: stories.user,
           password: stories.password
         },
-        json: { jql: 'QUERY' }
+        json: {
+          jql: 'QUERY',
+          fields: [
+            'issuetype',
+            'priority',
+            'summary',
+            'status'
+          ]
+        }
       }
     })
 
