@@ -19,8 +19,10 @@ app.use('/stories', story_router.routes())
 
 app.use(express.static('public'))
 
+var port = process.env.PORT || 3000
+
 if (process.env.NODE_ENV !== 'test') {
-  var server = app.listen(3000, function () {
+  var server = app.listen(port, function () {
     var host = server.address().address
     var port = server.address().port
 

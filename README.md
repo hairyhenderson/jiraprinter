@@ -24,6 +24,16 @@ Each story is printed out as a half-page (US Letter) card, with the Story number
 
 ## Usage
 
+### with Docker
+
+You can run jiraprinter in Docker:
+
+```console
+$ docker run -d -p 8080:80 -e JIRA_PASS hairyhenderson/jiraprinter -h myjira.example.com -p 'My Project' -u me
+```
+
+Or, you can use `npm` to install it:
+
 ### install
 
 ```console
