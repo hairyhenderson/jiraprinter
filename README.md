@@ -2,6 +2,7 @@
 [![Code Coverage][coverage-image]][coverage-url]
 [![Code Climate][climate-image]][climate-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![JS Standard Style][js-standard-image]][js-standard-url]
 <!-- [![Current Version][npm-image]][npm-url] -->
 
 <!-- [![Stories in Ready][waffle-ready-image]][waffle-url]
@@ -22,22 +23,32 @@ Each story is printed out as a half-page (US Letter) card, with the Story number
 
 ## Usage
 
-### configure it
+### install
 
-You need to provide your JIRA instance's URL, as well as a username & password to connect as.
-
-Edit `index.js` file and set your `host`, `username`, and `password` parameters.
-
-### install it
 ```console
-$ npm install
+$ npm install -g
 ```
 
 ### run it!
 
 ```console
-$ npm start
+$ jiraprinter --help
+
+  Usage: jiraprinter [options]
+
+  Options:
+
+    -h, --help               output usage information
+    -V, --version            output the version number
+    -p, --project <project>  The JIRA project name
+    -t, --type [type]        The issue type to list [Story]
+    -u, --user [username]    The JIRA username ($USER)
+    --password [password]    The JIRA password ($JIRA_PASS)
+    -h, --host <host>        The JIRA hostname
+$ jiraprinter -h myjira.example.com -p 'My Project' -u me
 ```
+
+_You should probably only ever use `$JIRA_PASS`, and not the `--password` flag!_
 
 Now, connect with your browser at http://localhost:3000, and when the UI's fully populated with your stories, print the page!
 
@@ -48,7 +59,7 @@ Now, connect with your browser at http://localhost:3000, and when the UI's fully
 Copyright (c) 2015 Dave Henderson
 
 [circleci-image]: https://img.shields.io/circleci/project/hairyhenderson/jiraprinter.svg?style=flat
-[circleci-url]: https://circleci.org/gh/hairyhenderson/jiraprinter
+[circleci-url]: https://circleci.com/gh/hairyhenderson/jiraprinter
 
 [coverage-image]: https://img.shields.io/codeclimate/coverage/github/hairyhenderson/jiraprinter.svg?style=flat
 [coverage-url]: https://codeclimate.com/github/hairyhenderson/jiraprinter
@@ -65,3 +76,6 @@ Copyright (c) 2015 Dave Henderson
 [waffle-ready-image]: https://badge.waffle.io/hairyhenderson/jiraprinter.svg?label=ready&title=Ready
 [waffle-progress-image]: https://badge.waffle.io/hairyhenderson/jiraprinter.svg?label=in+progress&title=In+Progress
 [waffle-url]: https://waffle.io/hairyhenderson/jiraprinter
+
+[js-standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat
+[js-standard-url]: http://standardjs.com/
