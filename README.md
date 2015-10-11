@@ -2,6 +2,7 @@
 [![Code Coverage][coverage-image]][coverage-url]
 [![Code Climate][climate-image]][climate-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![Current Version][npm-image]][npm-url]
 [![JS Standard Style][js-standard-image]][js-standard-url]
 <!-- [![Current Version][npm-image]][npm-url] -->
 
@@ -26,7 +27,7 @@ Each story is printed out as a half-page (US Letter) card, with the Story number
 ### install
 
 ```console
-$ npm install -g
+$ npm install -g jiraprinter
 ```
 
 ### run it!
