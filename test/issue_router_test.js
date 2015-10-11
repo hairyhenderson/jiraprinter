@@ -2,16 +2,16 @@ var express = require('express')
 var sinon = require('sinon')
 require('should')
 
-var StoryRouter = require('../routes/story_router')
+var IssueRouter = require('../routes/issue_router')
 
-describe('StoryRouter', function () {
-  var sr, router, _router
+describe('IssueRouter', function () {
+  var ir, router, _router
 
   beforeEach(function () {
     router = express.Router()
     _router = sinon.mock(router)
-    sr = new StoryRouter({}, router)
-    sr.stories = {
+    ir = new IssueRouter({}, router)
+    ir.issues = {
       get: function () {}
     }
   })
@@ -28,7 +28,7 @@ describe('StoryRouter', function () {
     it('returns router', function (done) {
       _router.expects('get').withArgs('/')
 
-      sr.routes().should.be.ok()
+      ir.routes().should.be.ok()
       verifyAll()
       done()
     })
