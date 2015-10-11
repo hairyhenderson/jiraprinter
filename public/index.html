@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>JIRA Storyboard</title>
+    <title>jiraprinter</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <style media="print">
       html, body { height: 100%; float:none; font-size: 44pt;}
@@ -53,7 +53,27 @@
   <body class="ng-scope">
     <div class="container" ng-app="JiraStoryboard">
       <div ng-controller="ApplicationController">
+        <div class="row hidden-print">
+          <div class="col-xs-12">
+            <h1>jiraprinter</h1>
+          </div>
+        </div>
+        <div class="row hidden-print">
+          <div class="col-xs-6">
+            <div class="btn-group" role="group">
+              <button class="btn btn-info" type="button" onclick="window.print()" title="Print {{stories.length}} story cards">Print <span class="badge">{{ stories.length }}</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="row hidden-print">
+          <div class="col-xs-12">
+            <hr>
+          </div>
+        </div>
         <div class="row">
+          <div ng-hide="!!stories" class="col-xs-12 col-md-offset-3 col-md-6 alert alert-info">
+            Loading...
+          </div>
           <div ng-repeat="story in stories" class="col-xs-12 col-md-6 col-print-12">
             <div class="panel panel-default" ng-class-odd="'odd'" ng-class-even="'even'">
               <div class="panel-heading ">
