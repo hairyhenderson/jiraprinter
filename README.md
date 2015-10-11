@@ -4,10 +4,6 @@
 [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![Current Version][npm-image]][npm-url]
 [![JS Standard Style][js-standard-image]][js-standard-url]
-<!-- [![Current Version][npm-image]][npm-url] -->
-
-<!-- [![Stories in Ready][waffle-ready-image]][waffle-url]
-[![Stories In Progress][waffle-progress-image]][waffle-url] -->
 
 # jiraprinter
 
