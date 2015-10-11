@@ -1,5 +1,31 @@
 # Change Log
 
+## [Unreleased](https://github.com/hairyhenderson/jiraprinter/tree/HEAD)
+
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v0.2.0...HEAD)
+
+**Merged pull requests:**
+
+- 0.2.0 [\#14](https://github.com/hairyhenderson/jiraprinter/pull/14) ([hairyhenderson](https://github.com/hairyhenderson))
+
+## [v0.2.0](https://github.com/hairyhenderson/jiraprinter/tree/v0.2.0) (2015-10-11)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v0.1.0...v0.2.0)
+
+**Implemented enhancements:**
+
+- I want to switch issue type \(from Story to Bug\) in the front-end [\#4](https://github.com/hairyhenderson/jiraprinter/issues/4)
+- Adding support for switching issue type [\#12](https://github.com/hairyhenderson/jiraprinter/pull/12) ([hairyhenderson](https://github.com/hairyhenderson))
+- Adding a print button [\#10](https://github.com/hairyhenderson/jiraprinter/pull/10) ([hairyhenderson](https://github.com/hairyhenderson))
+
+**Merged pull requests:**
+
+- Removing useless comments from README [\#11](https://github.com/hairyhenderson/jiraprinter/pull/11) ([hairyhenderson](https://github.com/hairyhenderson))
+- Slimming down Docker image \(npm install --production\) [\#9](https://github.com/hairyhenderson/jiraprinter/pull/9) ([hairyhenderson](https://github.com/hairyhenderson))
+- Scoping the query so unused fields aren't returned [\#8](https://github.com/hairyhenderson/jiraprinter/pull/8) ([hairyhenderson](https://github.com/hairyhenderson))
+- Dockerizing jiraprinter [\#7](https://github.com/hairyhenderson/jiraprinter/pull/7) ([hairyhenderson](https://github.com/hairyhenderson))
+- Published to npm - adding to README [\#6](https://github.com/hairyhenderson/jiraprinter/pull/6) ([hairyhenderson](https://github.com/hairyhenderson))
+- Fixing gitignore patterns for dirs [\#5](https://github.com/hairyhenderson/jiraprinter/pull/5) ([hairyhenderson](https://github.com/hairyhenderson))
+
 ## [v0.1.0](https://github.com/hairyhenderson/jiraprinter/tree/v0.1.0) (2015-10-11)
 **Merged pull requests:**
 
