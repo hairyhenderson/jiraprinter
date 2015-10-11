@@ -1,78 +1,31 @@
-'use strict';
-
-// Set these options first!
-var config = {
-  host: 'UNSET.atlassian.net',
-  port: '443',
-  user: 'UNSET',
-  password: 'UNSET'
-}
-
-var request = require('request')
-var async = require('async')
+#!/usr/bin/env node
+var config = require('commander')
 var express = require('express')
+var StoryRouter = require('./routes/story_router')
 var app = express()
 
-var filterId = 12708
-var searchUrl
+config
+  .version(require('./package.json').version)
+  .option('-p, --project <project>', 'The JIRA project name')
+  .option('-t, --type [type]', 'The issue type to list [Story]', 'Story')
+  .option('-u, --user [username]', 'The JIRA username ($USER)', process.env.USER)
+  .option('--password [password]', 'The JIRA password ($JIRA_PASS)', process.env.JIRA_PASS)
+  .option('-h, --host <host>', 'The JIRA hostname')
+  .parse(process.argv)
 
-function getSearchUrl(callback) {
-  if (!!searchUrl) {
-    callback(null, searchUrl)
-  } else {
-    request.get('https://' + config.host + '/rest/api/latest/filter/' + filterId, {
-      auth: {
-        user: config.user,
-        password: config.password
-      },
-      json: true
-    }, function(err, res, body) {
-      if (err) throw err
-      if (err || res.statusCode != 200) {
-        callback(err)
-      } else {
-        searchUrl = body.searchUrl
-        callback(null, searchUrl)
-      }
-    })
-  }
-}
+var story_router = new StoryRouter(config, express.Router())
 
-app.get('/stories', function(req, res, next) {
-  async.waterfall([
-    getSearchUrl,
-    function search(url, callback) {
-      request.get(url, {
-        auth: {
-          user: config.user,
-          password: config.password
-        },
-        json: true
-      }, function(err, res, body) {
-        async.map(body.issues, function(issue, callback) {
-            callback(null, {
-              name: issue.fields.issuetype.name,
-              key: issue.key,
-              priority: issue.fields.priority.name,
-              summary: issue.fields.summary,
-              status: issue.fields.status.name,
-              url: 'https://' + config.host + '/browse/' + issue.key
-            })
-          }, callback)
-      })
-    }
-  ], function(err, stories) {
-    if (err) return next(err)
-
-    res.send(stories)
-  })
-})
+app.use('/stories', story_router.routes())
 
 app.use(express.static('public'))
 
-var server = app.listen(3000, function() {
-  var host = server.address().address;
-  var port = server.address().port;
+if (process.env.NODE_ENV !== 'test') {
+  var server = app.listen(3000, function () {
+    var host = server.address().address
+    var port = server.address().port
 
-  console.log('jiraprinter listening at http://%s:%s', host, port);
-})
+    console.log('jiraprinter listening at http://%s:%s', host, port)
+  })
+}
+
+module.exports = app
