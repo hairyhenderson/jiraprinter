@@ -1,6 +1,6 @@
 {
   "name": "jiraprinter",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Print out Story cards from JIRA",
   "main": "index.js",
   "scripts": {
