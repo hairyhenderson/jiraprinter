@@ -1,21 +1,23 @@
 #!/usr/bin/env node
 var config = require('commander')
 var express = require('express')
-var StoryRouter = require('./routes/story_router')
+var IssueTypeRouter = require('./routes/issuetype_router')
+var IssueRouter = require('./routes/issue_router')
 var app = express()
 
 config
   .version(require('./package.json').version)
   .option('-p, --project <project>', 'The JIRA project name')
-  .option('-t, --type [type]', 'The issue type to list [Story]', 'Story')
   .option('-u, --user [username]', 'The JIRA username ($USER)', process.env.USER)
   .option('--password [password]', 'The JIRA password ($JIRA_PASS)', process.env.JIRA_PASS)
   .option('-h, --host <host>', 'The JIRA hostname')
   .parse(process.argv)
 
-var story_router = new StoryRouter(config, express.Router())
+var issuetype_router = new IssueTypeRouter(config, express.Router())
+var issue_router = new IssueRouter(config, express.Router())
 
-app.use('/stories', story_router.routes())
+app.use('/issuetypes', issuetype_router.routes())
+app.use('/issues', issue_router.routes())
 
 app.use(express.static('public'))
 

@@ -1,4 +1,4 @@
-var Stories = require('../lib/stories')
+var Issues = require('../lib/issues')
 var request = require('request')
 var sinon = require('sinon')
 var should = require('should')
@@ -35,19 +35,19 @@ var SAMPLE_JIRA_BODY = {
   }]
 }
 
-describe('Stories', function () {
-  var stories, _stories, r, _res, res
+describe('Issues', function () {
+  var issues, _issues, r, _res, res
 
   beforeEach(function () {
     r = sinon.mock(request)
-    stories = new Stories({
+    issues = new Issues({
       project: 'Test Project',
       type: 'Story',
       user: 'joe',
       password: 'foo',
       host: 'jira.example.com'
     })
-    _stories = sinon.mock(stories)
+    _issues = sinon.mock(issues)
     res = {
       status: function () {},
       send: function () {},
@@ -59,19 +59,24 @@ describe('Stories', function () {
   afterEach(function () {
     r.restore()
     _res.restore()
-    _stories.restore()
+    _issues.restore()
   })
 
   function verifyAll () {
     r.verify()
     _res.verify()
-    _stories.verify()
+    _issues.verify()
   }
 
   describe('_buildQuery', function () {
     it('should build JQL query with given inputs', function (done) {
       var expected = 'project = "Test Project" AND type = "Story" AND sprint in openSprints()'
-      stories._buildQuery().should.eql(expected)
+      issues._buildQuery('Story').should.eql(expected)
+      done()
+    })
+    it('should build query for Bugs given Bug input', function (done) {
+      var expected = 'project = "Test Project" AND type = "Bug" AND sprint in openSprints()'
+      issues._buildQuery('Bug').should.eql(expected)
       done()
     })
   })
@@ -80,10 +85,10 @@ describe('Stories', function () {
     var requestOpts
     beforeEach(function () {
       requestOpts = {
-        uri: 'https://' + stories.host + '/rest/api/latest/search',
+        uri: 'https://' + issues.host + '/rest/api/latest/search',
         auth: {
-          user: stories.user,
-          password: stories.password
+          user: issues.user,
+          password: issues.password
         },
         json: {
           jql: 'QUERY',
@@ -98,17 +103,17 @@ describe('Stories', function () {
     })
 
     it('errors when connection to JIRA fails', function (done) {
-      _stories.expects('_buildQuery').returns('QUERY')
+      _issues.expects('_buildQuery').withArgs('Story').returns('QUERY')
       r.expects('post').withArgs(requestOpts).yields('ERROR')
 
-      stories.search(function (err) {
+      issues.search('Story', function (err) {
         err.should.eql('ERROR')
         verifyAll()
         done()
       })
     })
     it('errors when JIRA replies with a non-OK HTTP code', function (done) {
-      _stories.expects('_buildQuery').returns('QUERY')
+      _issues.expects('_buildQuery').withArgs('Bug').returns('QUERY')
       r.expects('post').withArgs(requestOpts).yields(null, {
         statusCode: 404,
         request: {
@@ -117,7 +122,7 @@ describe('Stories', function () {
         }
       }, 'not found')
 
-      stories.search(function (err) {
+      issues.search('Bug', function (err) {
         err.should.eql({
           message: 'got status 404 while POSTing to the_uri',
           method: 'POST',
@@ -129,15 +134,15 @@ describe('Stories', function () {
       })
     })
     it('yields JIRA search results', function (done) {
-      _stories.expects('_buildQuery').returns('QUERY')
+      _issues.expects('_buildQuery').withArgs('Story').returns('QUERY')
       r.expects('post').withArgs(requestOpts).yields(null, {
         statusCode: 200
       }, SAMPLE_JIRA_BODY)
 
-      stories.search(function (err, stories) {
+      issues.search('Story', function (err, issues) {
         should.not.exist(err)
 
-        stories.should.eql([{
+        issues.should.eql([{
           name: SAMPLE_JIRA_BODY.issues[0].fields.issuetype.name,
           key: SAMPLE_JIRA_BODY.issues[0].key,
           priority: SAMPLE_JIRA_BODY.issues[0].fields.priority.name,
@@ -160,24 +165,41 @@ describe('Stories', function () {
 
   describe('get', function () {
     it('errors when search fails', function (done) {
-      _stories.expects('search').yields('ERROR')
+      _issues.expects('search').yields('ERROR')
 
-      stories.get(null, null, function (err) {
+      issues.get(null, null, function (err) {
         err.should.eql('ERROR')
         verifyAll()
         done()
       })
     })
-    it('responds with search results', function (done) {
+    it('responds with Stories given no query params', function (done) {
       var s = [{
         name: 'foo'
       }, {
         name: 'bar'
       }]
-      _stories.expects('search').yields(null, s)
+      _issues.expects('search').withArgs('Story').yields(null, s)
       _res.expects('send').withArgs(s)
 
-      stories.get(null, res)
+      issues.get(null, res)
+      done()
+    })
+    it('responds with Bugs given issuetype=Bug query param', function (done) {
+      var req = {
+        query: {
+          issuetype: 'Bug'
+        }
+      }
+      var s = [{
+        name: 'foo'
+      }, {
+        name: 'bar'
+      }]
+      _issues.expects('search').withArgs('Bug').yields(null, s)
+      _res.expects('send').withArgs(s)
+
+      issues.get(req, res)
       done()
     })
   })
