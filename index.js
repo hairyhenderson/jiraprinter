@@ -8,10 +8,32 @@ var app = express()
 
 config
   .version(require('./package.json').version)
-  .option('-u, --user [username]', 'The JIRA username ($USER)', process.env.USER)
+  .option('-u, --user [username]', 'The JIRA username ($JIRA_USER)', process.env.JIRA_USER)
   .option('--password [password]', 'The JIRA password ($JIRA_PASS)', process.env.JIRA_PASS)
-  .option('-h, --host <host>', 'The JIRA hostname')
+  .option('-h, --host [host]', 'The JIRA hostname ($JIRA_HOST)', process.env.JIRA_HOST)
   .parse(process.argv)
+
+function validateOpts (config) {
+  var errors = 0
+  if (!config.user) {
+    console.error('ERROR: Username required. Use -u/--user, or set $JIRA_USER')
+    errors++
+  }
+  if (!config.password) {
+    console.error('ERROR: Password required. Set $JIRA_PASS (or use --password)')
+    errors++
+  }
+  if (!config.host) {
+    console.error('ERROR: JIRA hostname required. Use -h/--host, or set $JIRA_HOST')
+    errors++
+  }
+
+  if (errors) {
+    process.exit(errors)
+  }
+}
+
+validateOpts(config)
 
 var issuetype_router = new IssueTypeRouter(config, express.Router())
 var issue_router = new IssueRouter(config, express.Router())

@@ -9,6 +9,4 @@ COPY . /usr/src/app
 
 ENV PORT 80
 
-ENTRYPOINT [ "node", "index.js" ]
-
-CMD [ "--help" ]
+CMD [ "node", "index.js" ]
