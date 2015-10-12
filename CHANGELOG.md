@@ -2,10 +2,22 @@
 
 ## [Unreleased](https://github.com/hairyhenderson/jiraprinter/tree/HEAD)
 
-[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.0.0...HEAD)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.1.0...HEAD)
 
 **Merged pull requests:**
 
+- 1.1.0 [\#21](https://github.com/hairyhenderson/jiraprinter/pull/21) ([hairyhenderson](https://github.com/hairyhenderson))
+
+## [v1.1.0](https://github.com/hairyhenderson/jiraprinter/tree/v1.1.0) (2015-10-12)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.0.0...v1.1.0)
+
+**Implemented enhancements:**
+
+- Supporting env vars for all options, plus opt validation [\#20](https://github.com/hairyhenderson/jiraprinter/pull/20) ([hairyhenderson](https://github.com/hairyhenderson))
+
+**Merged pull requests:**
+
+- Updating CHANGELOG post-1.0 [\#19](https://github.com/hairyhenderson/jiraprinter/pull/19) ([hairyhenderson](https://github.com/hairyhenderson))
 - 1.0.0 [\#18](https://github.com/hairyhenderson/jiraprinter/pull/18) ([hairyhenderson](https://github.com/hairyhenderson))
 
 ## [v1.0.0](https://github.com/hairyhenderson/jiraprinter/tree/v1.0.0) (2015-10-12)
