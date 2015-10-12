@@ -2,6 +2,19 @@ engines:
   eslint:
     enabled: true
   csslint:
-    enabled: true
+    enabled: false
+    include_paths:
+      - public/index.html
   fixme:
-    enabled: true
+    enabled: false
+ratings:
+  paths:
+    - "*.js"
+    - "lib/**/*"
+    - "public/**/*"
+    - "routes/**/*"
+    - "tests/**/*"
+exclude_paths:
+  - "node_modules/**/*"
+  - "coverage/**/*"
+  - ".git/**/*"
