@@ -1,2 +1,7 @@
-languages:
-  JavaScript: true
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  fixme:
+    enabled: true
