@@ -8,7 +8,6 @@ var app = express()
 
 config
   .version(require('./package.json').version)
-  .option('-p, --project <project>', 'The JIRA project name')
   .option('-u, --user [username]', 'The JIRA username ($USER)', process.env.USER)
   .option('--password [password]', 'The JIRA password ($JIRA_PASS)', process.env.JIRA_PASS)
   .option('-h, --host <host>', 'The JIRA hostname')

@@ -25,7 +25,7 @@ Each story is printed out as a half-page (US Letter) card, with the Story number
 You can run jiraprinter in Docker:
 
 ```console
-$ docker run -d -p 8080:80 -e JIRA_PASS hairyhenderson/jiraprinter -h myjira.example.com -p 'My Project' -u me
+$ docker run -d -p 8080:80 -e JIRA_PASS hairyhenderson/jiraprinter -h myjira.example.com -u me
 ```
 
 Or, you can use `npm` to install it:
@@ -47,17 +47,15 @@ $ jiraprinter --help
 
     -h, --help               output usage information
     -V, --version            output the version number
-    -p, --project <project>  The JIRA project name
-    -t, --type [type]        The issue type to list [Story]
     -u, --user [username]    The JIRA username ($USER)
     --password [password]    The JIRA password ($JIRA_PASS)
     -h, --host <host>        The JIRA hostname
-$ jiraprinter -h myjira.example.com -p 'My Project' -u me
+$ jiraprinter -h myjira.example.com -u me
 ```
 
 _You should probably only ever use `$JIRA_PASS`, and not the `--password` flag!_
 
-Now, connect with your browser at http://localhost:3000, and when the UI's fully populated with your stories, print the page!
+Now, connect with your browser at http://localhost:3000, select your project, and when the UI's fully populated with your stories, print the page!
 
 ## License
 
