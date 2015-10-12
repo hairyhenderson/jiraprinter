@@ -2,10 +2,24 @@
 
 ## [Unreleased](https://github.com/hairyhenderson/jiraprinter/tree/HEAD)
 
-[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v0.2.0...HEAD)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.0.0...HEAD)
 
 **Merged pull requests:**
 
+- 1.0.0 [\#18](https://github.com/hairyhenderson/jiraprinter/pull/18) ([hairyhenderson](https://github.com/hairyhenderson))
+
+## [v1.0.0](https://github.com/hairyhenderson/jiraprinter/tree/v1.0.0) (2015-10-12)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v0.2.0...v1.0.0)
+
+**Implemented enhancements:**
+
+- I want to change the current project [\#13](https://github.com/hairyhenderson/jiraprinter/issues/13)
+
+**Merged pull requests:**
+
+- Removing `-p/--project` option from the CLI [\#17](https://github.com/hairyhenderson/jiraprinter/pull/17) ([hairyhenderson](https://github.com/hairyhenderson))
+- Project can \(must\) now be selected in the UI [\#16](https://github.com/hairyhenderson/jiraprinter/pull/16) ([hairyhenderson](https://github.com/hairyhenderson))
+- Updating CHANGELOG post-0.2 [\#15](https://github.com/hairyhenderson/jiraprinter/pull/15) ([hairyhenderson](https://github.com/hairyhenderson))
 - 0.2.0 [\#14](https://github.com/hairyhenderson/jiraprinter/pull/14) ([hairyhenderson](https://github.com/hairyhenderson))
 
 ## [v0.2.0](https://github.com/hairyhenderson/jiraprinter/tree/v0.2.0) (2015-10-11)
