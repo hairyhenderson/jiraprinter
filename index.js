@@ -3,6 +3,7 @@ var config = require('commander')
 var express = require('express')
 var IssueTypeRouter = require('./routes/issuetype_router')
 var IssueRouter = require('./routes/issue_router')
+var ProjectRouter = require('./routes/project_router')
 var app = express()
 
 config
@@ -15,9 +16,11 @@ config
 
 var issuetype_router = new IssueTypeRouter(config, express.Router())
 var issue_router = new IssueRouter(config, express.Router())
+var project_router = new ProjectRouter(config, express.Router())
 
 app.use('/issuetypes', issuetype_router.routes())
 app.use('/issues', issue_router.routes())
+app.use('/projects', project_router.routes())
 
 app.use(express.static('public'))
 

@@ -71,12 +71,17 @@ describe('Issues', function () {
   describe('_buildQuery', function () {
     it('should build JQL query with given inputs', function (done) {
       var expected = 'project = "Test Project" AND type = "Story" AND sprint in openSprints()'
-      issues._buildQuery('Story').should.eql(expected)
+      issues._buildQuery('Story', 'Test Project').should.eql(expected)
       done()
     })
     it('should build query for Bugs given Bug input', function (done) {
       var expected = 'project = "Test Project" AND type = "Bug" AND sprint in openSprints()'
-      issues._buildQuery('Bug').should.eql(expected)
+      issues._buildQuery('Bug', 'Test Project').should.eql(expected)
+      done()
+    })
+    it('should build query for other project given Alternate Project input', function (done) {
+      var expected = 'project = "Alternate Project" AND type = "Story" AND sprint in openSprints()'
+      issues._buildQuery('Story', 'Alternate Project').should.eql(expected)
       done()
     })
   })
@@ -106,7 +111,7 @@ describe('Issues', function () {
       _issues.expects('_buildQuery').withArgs('Story').returns('QUERY')
       r.expects('post').withArgs(requestOpts).yields('ERROR')
 
-      issues.search('Story', function (err) {
+      issues.search('Story', 'Test Project', function (err) {
         err.should.eql('ERROR')
         verifyAll()
         done()
@@ -122,7 +127,7 @@ describe('Issues', function () {
         }
       }, 'not found')
 
-      issues.search('Bug', function (err) {
+      issues.search('Bug', 'Test Project', function (err) {
         err.should.eql({
           message: 'got status 404 while POSTing to the_uri',
           method: 'POST',
@@ -139,7 +144,7 @@ describe('Issues', function () {
         statusCode: 200
       }, SAMPLE_JIRA_BODY)
 
-      issues.search('Story', function (err, issues) {
+      issues.search('Story', 'Test Project', function (err, issues) {
         should.not.exist(err)
 
         issues.should.eql([{
@@ -165,15 +170,31 @@ describe('Issues', function () {
 
   describe('get', function () {
     it('errors when search fails', function (done) {
+      var req = {
+        query: {
+          project: 'Test Project'
+        }
+      }
       _issues.expects('search').yields('ERROR')
 
-      issues.get(null, null, function (err) {
+      issues.get(req, null, function (err) {
         err.should.eql('ERROR')
         verifyAll()
         done()
       })
     })
+    it('responds with no data given no project query param', function (done) {
+      _res.expects('send').withArgs([])
+      issues.get({}, res)
+      verifyAll()
+      done()
+    })
     it('responds with Stories given no query params', function (done) {
+      var req = {
+        query: {
+          project: 'Test Project'
+        }
+      }
       var s = [{
         name: 'foo'
       }, {
@@ -182,13 +203,15 @@ describe('Issues', function () {
       _issues.expects('search').withArgs('Story').yields(null, s)
       _res.expects('send').withArgs(s)
 
-      issues.get(null, res)
+      issues.get(req, res)
+      verifyAll()
       done()
     })
     it('responds with Bugs given issuetype=Bug query param', function (done) {
       var req = {
         query: {
-          issuetype: 'Bug'
+          issuetype: 'Bug',
+          project: 'Test Project'
         }
       }
       var s = [{
@@ -196,10 +219,11 @@ describe('Issues', function () {
       }, {
         name: 'bar'
       }]
-      _issues.expects('search').withArgs('Bug').yields(null, s)
+      _issues.expects('search').withArgs('Bug', 'Test Project').yields(null, s)
       _res.expects('send').withArgs(s)
 
       issues.get(req, res)
+      verifyAll()
       done()
     })
   })
