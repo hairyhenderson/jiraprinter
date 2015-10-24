@@ -41,7 +41,7 @@ describe('Issues', function () {
   beforeEach(function () {
     r = sinon.mock(request)
     issues = new Issues({
-      project: 'Test Project',
+      board: 'Test Board',
       type: 'Story',
       user: 'joe',
       password: 'foo',
@@ -70,18 +70,18 @@ describe('Issues', function () {
 
   describe('_buildQuery', function () {
     it('should build JQL query with given inputs', function (done) {
-      var expected = 'project = "Test Project" AND type = "Story" AND sprint in openSprints()'
-      issues._buildQuery('Story', 'Test Project').should.eql(expected)
+      var expected = 'type = "Story" AND sprint in openSprints()'
+      issues._buildQuery('Story', 'openSprints()').should.eql(expected)
       done()
     })
     it('should build query for Bugs given Bug input', function (done) {
-      var expected = 'project = "Test Project" AND type = "Bug" AND sprint in openSprints()'
-      issues._buildQuery('Bug', 'Test Project').should.eql(expected)
+      var expected = 'type = "Bug" AND sprint in openSprints()'
+      issues._buildQuery('Bug', 'openSprints()').should.eql(expected)
       done()
     })
-    it('should build query for other project given Alternate Project input', function (done) {
-      var expected = 'project = "Alternate Project" AND type = "Story" AND sprint in openSprints()'
-      issues._buildQuery('Story', 'Alternate Project').should.eql(expected)
+    it('should use right syntax given sprint ID', function (done) {
+      var expected = 'type = "Story" AND sprint = 42'
+      issues._buildQuery('Story', '42').should.eql(expected)
       done()
     })
   })
@@ -90,12 +90,12 @@ describe('Issues', function () {
     var requestOpts
     beforeEach(function () {
       requestOpts = {
-        uri: 'https://' + issues.host + '/rest/api/latest/search',
+        uri: 'https://' + issues.host + '/rest/agile/latest/board/1/issue',
         auth: {
           user: issues.user,
           password: issues.password
         },
-        json: {
+        qs: {
           jql: 'QUERY',
           fields: [
             'issuetype',
@@ -103,34 +103,35 @@ describe('Issues', function () {
             'summary',
             'status'
           ]
-        }
+        },
+        json: true
       }
     })
 
     it('errors when connection to JIRA fails', function (done) {
-      _issues.expects('_buildQuery').withArgs('Story').returns('QUERY')
-      r.expects('post').withArgs(requestOpts).yields('ERROR')
+      _issues.expects('_buildQuery').withArgs('Story', '42').returns('QUERY')
+      r.expects('get').withArgs(requestOpts).yields('ERROR')
 
-      issues.search('Story', 'Test Project', function (err) {
+      issues.search('Story', '1', '42', function (err) {
         err.should.eql('ERROR')
         verifyAll()
         done()
       })
     })
     it('errors when JIRA replies with a non-OK HTTP code', function (done) {
-      _issues.expects('_buildQuery').withArgs('Bug').returns('QUERY')
-      r.expects('post').withArgs(requestOpts).yields(null, {
+      _issues.expects('_buildQuery').withArgs('Bug', '42').returns('QUERY')
+      r.expects('get').withArgs(requestOpts).yields(null, {
         statusCode: 404,
         request: {
-          method: 'POST',
+          method: 'GET',
           uri: 'the_uri'
         }
       }, 'not found')
 
-      issues.search('Bug', 'Test Project', function (err) {
+      issues.search('Bug', '1', '42', function (err) {
         err.should.eql({
-          message: 'got status 404 while POSTing to the_uri',
-          method: 'POST',
+          message: 'got status 404 while GETing to the_uri',
+          method: 'GET',
           statusCode: 404,
           body: 'not found'
         })
@@ -139,12 +140,12 @@ describe('Issues', function () {
       })
     })
     it('yields JIRA search results', function (done) {
-      _issues.expects('_buildQuery').withArgs('Story').returns('QUERY')
-      r.expects('post').withArgs(requestOpts).yields(null, {
+      _issues.expects('_buildQuery').withArgs('Story', '42').returns('QUERY')
+      r.expects('get').withArgs(requestOpts).yields(null, {
         statusCode: 200
       }, SAMPLE_JIRA_BODY)
 
-      issues.search('Story', 'Test Project', function (err, issues) {
+      issues.search('Story', '1', '42', function (err, issues) {
         should.not.exist(err)
 
         issues.should.eql([{
@@ -172,7 +173,7 @@ describe('Issues', function () {
     it('errors when search fails', function (done) {
       var req = {
         query: {
-          project: 'Test Project'
+          board: 'Test Board'
         }
       }
       _issues.expects('search').yields('ERROR')
@@ -183,7 +184,7 @@ describe('Issues', function () {
         done()
       })
     })
-    it('responds with no data given no project query param', function (done) {
+    it('responds with no data given no board query param', function (done) {
       _res.expects('send').withArgs([])
       issues.get({}, res)
       verifyAll()
@@ -192,7 +193,7 @@ describe('Issues', function () {
     it('responds with Stories given no query params', function (done) {
       var req = {
         query: {
-          project: 'Test Project'
+          board: 'Test Board'
         }
       }
       var s = [{
@@ -211,7 +212,7 @@ describe('Issues', function () {
       var req = {
         query: {
           issuetype: 'Bug',
-          project: 'Test Project'
+          board: 'Test Board'
         }
       }
       var s = [{
@@ -219,7 +220,7 @@ describe('Issues', function () {
       }, {
         name: 'bar'
       }]
-      _issues.expects('search').withArgs('Bug', 'Test Project').yields(null, s)
+      _issues.expects('search').withArgs('Bug', 'Test Board').yields(null, s)
       _res.expects('send').withArgs(s)
 
       issues.get(req, res)

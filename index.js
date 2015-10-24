@@ -3,7 +3,8 @@ var config = require('commander')
 var express = require('express')
 var IssueTypeRouter = require('./routes/issuetype_router')
 var IssueRouter = require('./routes/issue_router')
-var ProjectRouter = require('./routes/project_router')
+var BoardRouter = require('./routes/board_router')
+var SprintRouter = require('./routes/sprint_router')
 var app = express()
 
 config
@@ -37,11 +38,13 @@ validateOpts(config)
 
 var issuetype_router = new IssueTypeRouter(config, express.Router())
 var issue_router = new IssueRouter(config, express.Router())
-var project_router = new ProjectRouter(config, express.Router())
+var board_router = new BoardRouter(config, express.Router())
+var sprint_router = new SprintRouter(config, express.Router())
 
 app.use('/issuetypes', issuetype_router.routes())
 app.use('/issues', issue_router.routes())
-app.use('/projects', project_router.routes())
+app.use('/boards', board_router.routes())
+app.use('/sprints', sprint_router.routes())
 
 app.use(express.static('public'))
 

@@ -79,12 +79,24 @@
                 </ul>
               </div>
 
-              <div class="btn-group" uib-dropdown is-open="projectStatus.isopen">
-                <button id="projectButton" type="button" class="btn btn-default" uib-dropdown-toggle>
-                  {{ project || 'Select a project...' }} <span class="caret"></span>
+              <div class="btn-group" uib-dropdown is-open="boardStatus.isopen">
+                <button id="boardButton" type="button" class="btn btn-default" uib-dropdown-toggle>
+                  {{ board.name || 'Select a board...' }} <span class="caret"></span>
                 </button>
-                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="projectButton">
-                  <li ng-repeat="project in projects"><a href="#" ng-click="setProject(project)">{{ project }}</a></li>
+                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="boardButton">
+                  <li ng-repeat="board in boards | orderBy:'name'"><a href="#" ng-click="setBoard(board)">{{ board.name }}</a></li>
+                </ul>
+              </div>
+
+              <div class="btn-group" uib-dropdown is-open="sprintStatus.isopen">
+                <button id="sprintButton" type="button" class="btn btn-default" uib-dropdown-toggle>
+                  {{ sprint.name }} <span class="caret"></span>
+                </button>
+                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="sprintButton">
+                  <li class="dropdown-header">Sprints</li>
+                  <li ng-repeat="sprint in preferred_sprints"><a href="#" ng-click="setSprint(sprint)"><strong>{{ sprint.name }}</strong></a></li>
+                  <li class="divider"></li>
+                  <li ng-repeat="sprint in sprints" class=""><a href="#" ng-click="setSprint(sprint)"><small>{{ sprint.name }}</small></a></li>
                 </ul>
               </div>
             </div>
