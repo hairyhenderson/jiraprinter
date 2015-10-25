@@ -2,16 +2,16 @@ var express = require('express')
 var sinon = require('sinon')
 require('should')
 
-var ProjectRouter = require('../routes/project_router')
+var BoardRouter = require('../routes/board_router')
 
-describe('ProjectRouter', function () {
-  var pr, router, _router
+describe('BoardRouter', function () {
+  var br, router, _router
 
   beforeEach(function () {
     router = express.Router()
     _router = sinon.mock(router)
-    pr = new ProjectRouter({}, router)
-    pr.projects = {
+    br = new BoardRouter({}, router)
+    br.boards = {
       get: function () {}
     }
   })
@@ -28,7 +28,7 @@ describe('ProjectRouter', function () {
     it('returns router', function (done) {
       _router.expects('get').withArgs('/')
 
-      pr.routes().should.be.ok()
+      br.routes().should.be.ok()
       verifyAll()
       done()
     })

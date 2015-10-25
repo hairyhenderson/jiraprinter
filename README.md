@@ -55,7 +55,7 @@ $ jiraprinter -h myjira.example.com -u me
 
 _You should probably only ever use `$JIRA_PASS`, and not the `--password` flag!_
 
-Now, connect with your browser at http://localhost:3000, select your project, and when the UI's fully populated with your stories, print the page!
+Now, connect with your browser at http://localhost:3000, select your board, and when the UI's fully populated with your stories, print the page!
 
 ## License
 

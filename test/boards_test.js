@@ -1,37 +1,33 @@
-var Projects = require('../lib/projects')
+var Boards = require('../lib/boards')
 var request = require('request')
 var sinon = require('sinon')
 var should = require('should')
 
-var SAMPLE_JIRA_BODY = [{
-  self: 'http://localhost:8090/jira/rest/api/latest/issueType/3',
-  id: '3',
-  description: 'A task that needs to be done.',
-  iconUrl: 'http://localhost:8090/jira/images/icons/projects/task.png',
-  name: 'Task',
-  subtask: false,
-  avatarId: 1
-}, {
-  self: 'http://localhost:8090/jira/rest/api/latest/issueType/1',
-  id: '1',
-  description: 'A problem with the software.',
-  iconUrl: 'http://localhost:8090/jira/images/icons/projects/bug.png',
-  name: 'Bug',
-  subtask: false,
-  avatarId: 10002
-}]
+var SAMPLE_JIRA_BODY = {
+  values: [ {
+    self: 'http://localhost:8090/jira/rest/agile/latest/board/3',
+    id: '3',
+    name: 'Board Three',
+    type: 'scrum'
+  }, {
+    self: 'http://localhost:8090/jira/rest/agile/latest/board/1',
+    id: '1',
+    name: 'Board One',
+    type: 'kanban'
+  }]
+}
 
-describe('Projects', function () {
-  var projects, _projects, r, _res, res
+describe('Boards', function () {
+  var boards, _boards, r, _res, res
 
   beforeEach(function () {
     r = sinon.mock(request)
-    projects = new Projects({
+    boards = new Boards({
       user: 'joe',
       password: 'foo',
       host: 'jira.example.com'
     })
-    _projects = sinon.mock(projects)
+    _boards = sinon.mock(boards)
     res = {
       status: function () {},
       send: function () {},
@@ -43,23 +39,23 @@ describe('Projects', function () {
   afterEach(function () {
     r.restore()
     _res.restore()
-    _projects.restore()
+    _boards.restore()
   })
 
   function verifyAll () {
     r.verify()
     _res.verify()
-    _projects.verify()
+    _boards.verify()
   }
 
-  describe('project', function () {
+  describe('board', function () {
     var requestOpts
     beforeEach(function () {
       requestOpts = {
-        uri: 'https://' + projects.host + '/rest/api/latest/project',
+        uri: 'https://' + boards.host + '/rest/agile/latest/board',
         auth: {
-          user: projects.user,
-          password: projects.password
+          user: boards.user,
+          password: boards.password
         },
         json: true
       }
@@ -68,7 +64,7 @@ describe('Projects', function () {
     it('errors when connection to JIRA fails', function (done) {
       r.expects('get').withArgs(requestOpts).yields('ERROR')
 
-      projects.project(function (err) {
+      boards.board(function (err) {
         err.should.eql('ERROR')
         verifyAll()
         done()
@@ -83,7 +79,7 @@ describe('Projects', function () {
         }
       }, 'not found')
 
-      projects.project(function (err) {
+      boards.board(function (err) {
         err.should.eql({
           message: 'got status 404 while GETing to the_uri',
           method: 'GET',
@@ -94,15 +90,15 @@ describe('Projects', function () {
         done()
       })
     })
-    it('yields JIRA project results', function (done) {
+    it('yields JIRA board results', function (done) {
       r.expects('get').withArgs(requestOpts).yields(null, {
         statusCode: 200
       }, SAMPLE_JIRA_BODY)
 
-      projects.project(function (err, projects) {
+      boards.board(function (err, boards) {
         should.not.exist(err)
 
-        projects.should.eql([ 'Task', 'Bug' ])
+        boards.should.eql(SAMPLE_JIRA_BODY.values)
         verifyAll()
         done()
       })
@@ -110,25 +106,25 @@ describe('Projects', function () {
   })
 
   describe('get', function () {
-    it('errors when project fails', function (done) {
-      _projects.expects('project').yields('ERROR')
+    it('errors when board fails', function (done) {
+      _boards.expects('board').yields('ERROR')
 
-      projects.get(null, null, function (err) {
+      boards.get(null, null, function (err) {
         err.should.eql('ERROR')
         verifyAll()
         done()
       })
     })
-    it('responds with project results', function (done) {
+    it('responds with board results', function (done) {
       var s = [{
         name: 'foo'
       }, {
         name: 'bar'
       }]
-      _projects.expects('project').yields(null, s)
+      _boards.expects('board').yields(null, s)
       _res.expects('send').withArgs(s)
 
-      projects.get(null, res)
+      boards.get(null, res)
       done()
     })
   })
