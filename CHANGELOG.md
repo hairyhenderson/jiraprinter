@@ -5,16 +5,11 @@
 
 **Implemented enhancements:**
 
-- Choose which sprint to list for [\#25](https://github.com/hairyhenderson/jiraprinter/issues/25)
-
-**Merged pull requests:**
-
-- fixing typo on test/ dir name [\#29](https://github.com/hairyhenderson/jiraprinter/pull/29) ([hairyhenderson](https://github.com/hairyhenderson))
 - Adding support for filtering on sprint [\#28](https://github.com/hairyhenderson/jiraprinter/pull/28) ([hairyhenderson](https://github.com/hairyhenderson))
-- Enabling Ranking on codeclimate config [\#24](https://github.com/hairyhenderson/jiraprinter/pull/24) ([hairyhenderson](https://github.com/hairyhenderson))
-- Updating codeclimate config for new codeclimate engines [\#23](https://github.com/hairyhenderson/jiraprinter/pull/23) ([hairyhenderson](https://github.com/hairyhenderson))
-- Updating CHANGELOG post-1.1 [\#22](https://github.com/hairyhenderson/jiraprinter/pull/22) ([hairyhenderson](https://github.com/hairyhenderson))
-- 1.1.0 [\#21](https://github.com/hairyhenderson/jiraprinter/pull/21) ([hairyhenderson](https://github.com/hairyhenderson))
+
+**Closed issues:**
+
+- Choose which sprint to list for [\#25](https://github.com/hairyhenderson/jiraprinter/issues/25)
 
 ## [v1.1.0](https://github.com/hairyhenderson/jiraprinter/tree/v1.1.0) (2015-10-12)
 [Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.0.0...v1.1.0)
@@ -22,11 +17,6 @@
 **Implemented enhancements:**
 
 - Supporting env vars for all options, plus opt validation [\#20](https://github.com/hairyhenderson/jiraprinter/pull/20) ([hairyhenderson](https://github.com/hairyhenderson))
-
-**Merged pull requests:**
-
-- Updating CHANGELOG post-1.0 [\#19](https://github.com/hairyhenderson/jiraprinter/pull/19) ([hairyhenderson](https://github.com/hairyhenderson))
-- 1.0.0 [\#18](https://github.com/hairyhenderson/jiraprinter/pull/18) ([hairyhenderson](https://github.com/hairyhenderson))
 
 ## [v1.0.0](https://github.com/hairyhenderson/jiraprinter/tree/v1.0.0) (2015-10-12)
 [Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v0.2.0...v1.0.0)
@@ -39,8 +29,6 @@
 
 - Removing `-p/--project` option from the CLI [\#17](https://github.com/hairyhenderson/jiraprinter/pull/17) ([hairyhenderson](https://github.com/hairyhenderson))
 - Project can \(must\) now be selected in the UI [\#16](https://github.com/hairyhenderson/jiraprinter/pull/16) ([hairyhenderson](https://github.com/hairyhenderson))
-- Updating CHANGELOG post-0.2 [\#15](https://github.com/hairyhenderson/jiraprinter/pull/15) ([hairyhenderson](https://github.com/hairyhenderson))
-- 0.2.0 [\#14](https://github.com/hairyhenderson/jiraprinter/pull/14) ([hairyhenderson](https://github.com/hairyhenderson))
 
 ## [v0.2.0](https://github.com/hairyhenderson/jiraprinter/tree/v0.2.0) (2015-10-11)
 [Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v0.1.0...v0.2.0)
@@ -58,13 +46,11 @@
 - Scoping the query so unused fields aren't returned [\#8](https://github.com/hairyhenderson/jiraprinter/pull/8) ([hairyhenderson](https://github.com/hairyhenderson))
 - Dockerizing jiraprinter [\#7](https://github.com/hairyhenderson/jiraprinter/pull/7) ([hairyhenderson](https://github.com/hairyhenderson))
 - Published to npm - adding to README [\#6](https://github.com/hairyhenderson/jiraprinter/pull/6) ([hairyhenderson](https://github.com/hairyhenderson))
-- Fixing gitignore patterns for dirs [\#5](https://github.com/hairyhenderson/jiraprinter/pull/5) ([hairyhenderson](https://github.com/hairyhenderson))
 
 ## [v0.1.0](https://github.com/hairyhenderson/jiraprinter/tree/v0.1.0) (2015-10-11)
 **Merged pull requests:**
 
 - A big ol' refactoring... [\#2](https://github.com/hairyhenderson/jiraprinter/pull/2) ([hairyhenderson](https://github.com/hairyhenderson))
-- Adding CI and badges [\#1](https://github.com/hairyhenderson/jiraprinter/pull/1) ([hairyhenderson](https://github.com/hairyhenderson))
 
 
 
