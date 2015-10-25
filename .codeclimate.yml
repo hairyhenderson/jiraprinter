@@ -13,7 +13,7 @@ ratings:
     - "lib/**/*"
     - "public/**/*"
     - "routes/**/*"
-    - "tests/**/*"
+    - "test/**/*"
 exclude_paths:
   - "node_modules/**/*"
   - "coverage/**/*"
