@@ -10,6 +10,8 @@
 > _As a JIRA user, I want to be able to print out my current sprint's stories,
 so that I can post them on a physical Kanban board._
 
+![Sample output](sample_card.png)
+
 ## Background
 
 While JIRA has a UI for tracking and interacting with the current sprint's stories, teams easily become distracted while using it together &mdash; the group ends up huddled around a laptop arguing about the best way to filter the search query, or getting lost in unimportant details. Sometimes low-tech solutions can be the most powerful: physical cards representing the stories.
