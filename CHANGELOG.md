@@ -1,11 +1,19 @@
 # Change Log
 
-## [Unreleased](https://github.com/hairyhenderson/jiraprinter/tree/HEAD)
+## [v2.0.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.0.0) (2015-10-25)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.1.0...v2.0.0)
 
-[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.1.0...HEAD)
+**Implemented enhancements:**
+
+- Choose which sprint to list for [\#25](https://github.com/hairyhenderson/jiraprinter/issues/25)
 
 **Merged pull requests:**
 
+- fixing typo on test/ dir name [\#29](https://github.com/hairyhenderson/jiraprinter/pull/29) ([hairyhenderson](https://github.com/hairyhenderson))
+- Adding support for filtering on sprint [\#28](https://github.com/hairyhenderson/jiraprinter/pull/28) ([hairyhenderson](https://github.com/hairyhenderson))
+- Enabling Ranking on codeclimate config [\#24](https://github.com/hairyhenderson/jiraprinter/pull/24) ([hairyhenderson](https://github.com/hairyhenderson))
+- Updating codeclimate config for new codeclimate engines [\#23](https://github.com/hairyhenderson/jiraprinter/pull/23) ([hairyhenderson](https://github.com/hairyhenderson))
+- Updating CHANGELOG post-1.1 [\#22](https://github.com/hairyhenderson/jiraprinter/pull/22) ([hairyhenderson](https://github.com/hairyhenderson))
 - 1.1.0 [\#21](https://github.com/hairyhenderson/jiraprinter/pull/21) ([hairyhenderson](https://github.com/hairyhenderson))
 
 ## [v1.1.0](https://github.com/hairyhenderson/jiraprinter/tree/v1.1.0) (2015-10-12)
