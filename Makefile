@@ -19,4 +19,7 @@ test-ci:
 	./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
 	cp -av coverage $(CIRCLE_ARTIFACTS)
 
-.PHONY: test lint test-cov test-ci
+gen-changelog:
+	github_changelog_generator --exclude-labels duplicate,question,invalid,wontfix,admin
+
+.PHONY: test lint test-cov test-ci gen-changelog
