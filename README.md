@@ -1,6 +1,8 @@
 [![Build Status][circleci-image]][circleci-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![Code Climate][climate-image]][climate-url]
+[![bitHound Overall Score][bithound-overall-image]][bithound-url]
+[![bitHound Dependencies][bithound-deps-image]][bithound-deps-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![Current Version][npm-image]][npm-url]
 [![JS Standard Style][js-standard-image]][js-standard-url]
@@ -86,3 +88,9 @@ Copyright (c) 2015 Dave Henderson
 
 [js-standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat
 [js-standard-url]: http://standardjs.com/
+
+[bithound-overall-image]: https://www.bithound.io/github/hairyhenderson/jiraprinter/badges/score.svg
+[bithound-url]: https://www.bithound.io/github/hairyhenderson/jiraprinter
+
+[bithound-deps-image]: https://www.bithound.io/github/hairyhenderson/jiraprinter/badges/dependencies.svg
+[bithound-deps-url]: https://www.bithound.io/github/hairyhenderson/jiraprinter/master/dependencies/npm
