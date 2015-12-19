@@ -61,35 +61,6 @@ describe('Boards', function () {
       }
     })
 
-    it('errors when connection to JIRA fails', function (done) {
-      r.expects('get').withArgs(requestOpts).yields('ERROR')
-
-      boards.board(function (err) {
-        err.should.eql('ERROR')
-        verifyAll()
-        done()
-      })
-    })
-    it('errors when JIRA replies with a non-OK HTTP code', function (done) {
-      r.expects('get').withArgs(requestOpts).yields(null, {
-        statusCode: 404,
-        request: {
-          method: 'GET',
-          uri: 'the_uri'
-        }
-      }, 'not found')
-
-      boards.board(function (err) {
-        err.should.eql({
-          message: 'got status 404 while GETing to the_uri',
-          method: 'GET',
-          statusCode: 404,
-          body: 'not found'
-        })
-        verifyAll()
-        done()
-      })
-    })
     it('yields JIRA board results', function (done) {
       r.expects('get').withArgs(requestOpts).yields(null, {
         statusCode: 200
@@ -106,15 +77,6 @@ describe('Boards', function () {
   })
 
   describe('get', function () {
-    it('errors when board fails', function (done) {
-      _boards.expects('board').yields('ERROR')
-
-      boards.get(null, null, function (err) {
-        err.should.eql('ERROR')
-        verifyAll()
-        done()
-      })
-    })
     it('responds with board results', function (done) {
       var s = [{
         name: 'foo'
