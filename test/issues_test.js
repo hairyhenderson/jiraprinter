@@ -108,37 +108,6 @@ describe('Issues', function () {
       }
     })
 
-    it('errors when connection to JIRA fails', function (done) {
-      _issues.expects('_buildQuery').withArgs('Story', '42').returns('QUERY')
-      r.expects('get').withArgs(requestOpts).yields('ERROR')
-
-      issues.search('Story', '1', '42', function (err) {
-        err.should.eql('ERROR')
-        verifyAll()
-        done()
-      })
-    })
-    it('errors when JIRA replies with a non-OK HTTP code', function (done) {
-      _issues.expects('_buildQuery').withArgs('Bug', '42').returns('QUERY')
-      r.expects('get').withArgs(requestOpts).yields(null, {
-        statusCode: 404,
-        request: {
-          method: 'GET',
-          uri: 'the_uri'
-        }
-      }, 'not found')
-
-      issues.search('Bug', '1', '42', function (err) {
-        err.should.eql({
-          message: 'got status 404 while GETing to the_uri',
-          method: 'GET',
-          statusCode: 404,
-          body: 'not found'
-        })
-        verifyAll()
-        done()
-      })
-    })
     it('yields JIRA search results', function (done) {
       _issues.expects('_buildQuery').withArgs('Story', '42').returns('QUERY')
       r.expects('get').withArgs(requestOpts).yields(null, {
@@ -170,20 +139,6 @@ describe('Issues', function () {
   })
 
   describe('get', function () {
-    it('errors when search fails', function (done) {
-      var req = {
-        query: {
-          board: 'Test Board'
-        }
-      }
-      _issues.expects('search').yields('ERROR')
-
-      issues.get(req, null, function (err) {
-        err.should.eql('ERROR')
-        verifyAll()
-        done()
-      })
-    })
     it('responds with no data given no board query param', function (done) {
       _res.expects('send').withArgs([])
       issues.get({}, res)

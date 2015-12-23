@@ -77,35 +77,6 @@ describe('Sprints', function () {
       }
     })
 
-    it('errors when connection to JIRA fails', function (done) {
-      r.expects('get').withArgs(requestOpts).yields('ERROR')
-
-      sprints.sprint('1', function (err) {
-        err.should.eql('ERROR')
-        verifyAll()
-        done()
-      })
-    })
-    it('errors when JIRA replies with a non-OK HTTP code', function (done) {
-      r.expects('get').withArgs(requestOpts).yields(null, {
-        statusCode: 404,
-        request: {
-          method: 'GET',
-          uri: 'the_uri'
-        }
-      }, 'not found')
-
-      sprints.sprint('1', function (err) {
-        err.should.eql({
-          message: 'got status 404 while GETing to the_uri',
-          method: 'GET',
-          statusCode: 404,
-          body: 'not found'
-        })
-        verifyAll()
-        done()
-      })
-    })
     it('yields JIRA sprint results', function (done) {
       r.expects('get').withArgs(requestOpts).yields(null, {
         statusCode: 200
@@ -122,19 +93,6 @@ describe('Sprints', function () {
   })
 
   describe('get', function () {
-    it('errors when sprint fails', function (done) {
-      _sprints.expects('sprint').yields('ERROR')
-
-      sprints.get({
-        query: {
-          boardId: '42'
-        }
-      }, null, function (err) {
-        err.should.eql('ERROR')
-        verifyAll()
-        done()
-      })
-    })
     it('responds with sprint results', function (done) {
       var s = [{
         name: 'foo'
