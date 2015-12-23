@@ -113,6 +113,32 @@ describe('Issues', function () {
       r.expects('get').withArgs(requestOpts).yields(null, {
         statusCode: 200
       }, SAMPLE_JIRA_BODY)
+      r.expects('get').withArgs({
+        uri: 'https://' + issues.host + '/rest/agile/latest/issue/JIRA-1111/estimation',
+        auth: {
+          user: issues.user,
+          password: issues.password
+        },
+        qs: {
+          boardId: '1'
+        },
+        json: true
+      }).yields(null, null, {
+        value: 13
+      })
+      r.expects('get').withArgs({
+        uri: 'https://' + issues.host + '/rest/agile/latest/issue/JIRA-1234/estimation',
+        auth: {
+          user: issues.user,
+          password: issues.password
+        },
+        qs: {
+          boardId: '1'
+        },
+        json: true
+      }).yields(null, null, {
+        value: 8
+      })
 
       issues.search('Story', '1', '42', function (err, issues) {
         should.not.exist(err)
@@ -123,6 +149,7 @@ describe('Issues', function () {
           priority: SAMPLE_JIRA_BODY.issues[0].fields.priority.name,
           summary: SAMPLE_JIRA_BODY.issues[0].fields.summary,
           status: SAMPLE_JIRA_BODY.issues[0].fields.status.name,
+          estimation: 13,
           url: 'https://jira.example.com/browse/JIRA-1111'
         }, {
           name: SAMPLE_JIRA_BODY.issues[1].fields.issuetype.name,
@@ -130,6 +157,7 @@ describe('Issues', function () {
           priority: SAMPLE_JIRA_BODY.issues[1].fields.priority.name,
           summary: SAMPLE_JIRA_BODY.issues[1].fields.summary,
           status: SAMPLE_JIRA_BODY.issues[1].fields.status.name,
+          estimation: 8,
           url: 'https://jira.example.com/browse/JIRA-1234'
         }])
         verifyAll()
