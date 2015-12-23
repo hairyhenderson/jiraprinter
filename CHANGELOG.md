@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.1.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.1.0) (2015-12-23)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v2.0.0...v2.1.0)
+
+**Implemented enhancements:**
+
+- Display story points if available [\#26](https://github.com/hairyhenderson/jiraprinter/issues/26)
+
+**Merged pull requests:**
+
+- Displaying story points [\#44](https://github.com/hairyhenderson/jiraprinter/pull/44) ([hairyhenderson](https://github.com/hairyhenderson))
+
 ## [v2.0.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.0.0) (2015-10-25)
 [Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v1.1.0...v2.0.0)
 
