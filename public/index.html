@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <title>jiraprinter</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .points {
+        color: rgb(128, 128, 128);
+
+      }
+    </style>
     <style media="print">
       html, body { height: 100%; float:none; font-size: 44pt;}
       .panel-title { color: black; font-size: 72pt; }
@@ -113,8 +119,8 @@
           </div>
           <div ng-repeat="issue in issues" class="col-xs-12 col-md-6 col-print-12">
             <div class="panel panel-default" ng-class-odd="'odd'" ng-class-even="'even'">
-              <div class="panel-heading ">
-                  <h3 class="panel-title"><img class="visible-print-inline" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&format=svg&data={{issue.url}}"/> {{ issue.key }}</h3>
+              <div class="panel-heading">
+                  <h3 class="panel-title"><img class="visible-print-inline" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&format=svg&data={{issue.url}}"/> {{ issue.key }} <div class="points pull-right">{{ issue.estimation }} <span class="hidden-print">points</span></div></h3>
               </div>
               <div class="panel-body">
                 {{ issue.summary }}
