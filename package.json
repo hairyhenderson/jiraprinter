@@ -34,7 +34,7 @@
     "nsp": "^2.2.0",
     "should": "^8.0.2",
     "sinon": "^1.17.2",
-    "standard": "^5.4.1",
+    "standard": "^6.0.2",
     "xunit-file": "^0.0.9"
   },
   "standard": {
