@@ -1,0 +1,9 @@
+jiraprinter:
+  image: hairyhenderson/jiraprinter
+  environment:
+    - JIRA_USER
+    - JIRA_PASS
+    - JIRA_HOST
+  ports:
+    - "80:80"
+  restart: always
