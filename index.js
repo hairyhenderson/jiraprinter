@@ -36,15 +36,15 @@ function validateOpts (config) {
 
 validateOpts(config)
 
-var issuetype_router = new IssueTypeRouter(config, express.Router())
-var issue_router = new IssueRouter(config, express.Router())
-var board_router = new BoardRouter(config, express.Router())
-var sprint_router = new SprintRouter(config, express.Router())
+var issuetypeRouter = new IssueTypeRouter(config, express.Router())
+var issueRouter = new IssueRouter(config, express.Router())
+var boardRouter = new BoardRouter(config, express.Router())
+var sprintRouter = new SprintRouter(config, express.Router())
 
-app.use('/issuetypes', issuetype_router.routes())
-app.use('/issues', issue_router.routes())
-app.use('/boards', board_router.routes())
-app.use('/sprints', sprint_router.routes())
+app.use('/issuetypes', issuetypeRouter.routes())
+app.use('/issues', issueRouter.routes())
+app.use('/boards', boardRouter.routes())
+app.use('/sprints', sprintRouter.routes())
 
 app.use(express.static('public'))
 
