@@ -30,7 +30,7 @@
   "devDependencies": {
     "codeclimate-test-reporter": "^0.3.0",
     "istanbul": "^0.4.0",
-    "mocha": "^2.3.4",
+    "mocha": "^2.5.0",
     "nsp": "^2.2.0",
     "should": "^8.0.2",
     "sinon": "^1.17.2",
