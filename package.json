@@ -35,7 +35,7 @@
     "should": "^9.0.0",
     "sinon": "^1.17.2",
     "standard": "^7.0.0",
-    "xunit-file": "^0.0.10"
+    "xunit-file": "^0.0.11"
   },
   "standard": {
     "globals": [
