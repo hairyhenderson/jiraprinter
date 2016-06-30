@@ -1,6 +1,7 @@
 [![Build Status][circleci-image]][circleci-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![Code Climate][climate-image]][climate-url]
+[![Codecov status][codecov-image]][codecov-url]
 [![bitHound Overall Score][bithound-overall-image]][bithound-url]
 [![bitHound Dependencies][bithound-deps-image]][bithound-deps-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
@@ -94,3 +95,6 @@ Copyright (c) 2015 Dave Henderson
 
 [bithound-deps-image]: https://www.bithound.io/github/hairyhenderson/jiraprinter/badges/dependencies.svg
 [bithound-deps-url]: https://www.bithound.io/github/hairyhenderson/jiraprinter/master/dependencies/npm
+
+[codecov-image]: https://img.shields.io/codecov/c/github/hairyhenderson/jiraprinter.svg
+[codecov-url]: https://codecov.io/gh/hairyhenderson/jiraprinter
