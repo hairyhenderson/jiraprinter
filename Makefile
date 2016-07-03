@@ -5,6 +5,7 @@ test:
 	@NODE_ENV=test NODE_PATH=lib ./node_modules/.bin/mocha -b --reporter $(REPORTER)
 
 lint:
+	./node_modules/.bin/dot-only-hunter
 	./node_modules/.bin/standard
 
 test-cov:

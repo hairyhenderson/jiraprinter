@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.3.0",
+    "dot-only-hunter": "^1.0.2",
     "istanbul": "^0.4.0",
     "mocha": "^3.0.0",
     "nsp": "^2.2.0",
