@@ -73,9 +73,33 @@
         <div class="row hidden-print">
           <div class="col-xs-6">
             <div class="btn-group" role="group">
-              <button class="btn btn-info" type="button" onclick="window.print()" title="Print {{issues.length}} cards">Print <span class="badge">{{ issues.length }}</span></button>
+              <div class="btn-group" uib-dropdown>
+                <button id="apiButton" type="button" class="btn btn-default" uib-dropdown-toggle>
+                  {{ apiType }} <span class="caret"></span>
+                </button>
+                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="apiButton">
+                  <li ng-repeat="api in supported_apis"><a href="#" ng-click="setApi(api)"><strong>{{ api }}</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
-              <div class="btn-group" uib-dropdown is-open="typeStatus.isopen">
+        <div class="row hidden-print">
+          <div class="col-xs-6">
+            <div class="btn-group" role="group">
+              <button class="btn btn-info" type="button" onclick="window.print()" title="Print {{issues.length}} cards">Print <span class="badge">{{ issues.length }}</span></button>
+              <!-- Filters -->
+              <div class="btn-group" uib-dropdown ng-show="apiType === 'Filters'" is-open="filterStatus.isopen">
+                <button id="filterButton" type="button" class="btn btn-default" uib-dropdown-toggle>
+                  {{ filter.name || 'Select a filter...' }} <span class="caret"></span>
+                </button>
+                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="filterButton">
+                  <li ng-repeat="filter in filters | orderBy:'name'"><a href="#" ng-click="setFilter(filter)">{{ filter.name }}</a></li>
+                </ul>
+              </div>
+              <!-- Boards -->
+              <div class="btn-group" uib-dropdown ng-show="apiType === 'Boards'" is-open="typeStatus.isopen">
                 <button id="typeButton" type="button" class="btn btn-default" uib-dropdown-toggle>
                   {{ issuetype }} <span class="caret"></span>
                 </button>
@@ -86,8 +110,7 @@
                   <li ng-repeat="type in issuetypes" class=""><a href="#" ng-click="setType(type)"><small>{{ type }}</small></a></li>
                 </ul>
               </div>
-
-              <div class="btn-group" uib-dropdown is-open="boardStatus.isopen">
+              <div class="btn-group" uib-dropdown ng-show="apiType === 'Boards'" is-open="boardStatus.isopen">
                 <button id="boardButton" type="button" class="btn btn-default" uib-dropdown-toggle>
                   {{ board.name || 'Select a board...' }} <span class="caret"></span>
                 </button>
@@ -95,8 +118,7 @@
                   <li ng-repeat="board in boards | orderBy:'name'"><a href="#" ng-click="setBoard(board)">{{ board.name }}</a></li>
                 </ul>
               </div>
-
-              <div class="btn-group" uib-dropdown is-open="sprintStatus.isopen">
+              <div class="btn-group" uib-dropdown ng-show="apiType === 'Boards'" is-open="sprintStatus.isopen">
                 <button id="sprintButton" type="button" class="btn btn-default" uib-dropdown-toggle>
                   {{ sprint.name }} <span class="caret"></span>
                 </button>

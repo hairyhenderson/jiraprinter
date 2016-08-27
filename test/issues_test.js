@@ -45,7 +45,7 @@ describe('Issues', function () {
       type: 'Story',
       user: 'joe',
       password: 'foo',
-      host: 'jira.example.com'
+      host: 'https://jira.example.com'
     })
     _issues = sinon.mock(issues)
     res = {
@@ -66,6 +66,26 @@ describe('Issues', function () {
     r.verify()
     _res.verify()
     _issues.verify()
+  }
+
+  function verifyIssues(issues) {
+    issues.should.eql([{
+      name: SAMPLE_JIRA_BODY.issues[0].fields.issuetype.name,
+      key: SAMPLE_JIRA_BODY.issues[0].key,
+      priority: SAMPLE_JIRA_BODY.issues[0].fields.priority.name,
+      summary: SAMPLE_JIRA_BODY.issues[0].fields.summary,
+      status: SAMPLE_JIRA_BODY.issues[0].fields.status.name,
+      estimation: 13,
+      url: 'https://jira.example.com/browse/JIRA-1111'
+    }, {
+      name: SAMPLE_JIRA_BODY.issues[1].fields.issuetype.name,
+      key: SAMPLE_JIRA_BODY.issues[1].key,
+    priority: SAMPLE_JIRA_BODY.issues[1].fields.priority.name,
+      summary: SAMPLE_JIRA_BODY.issues[1].fields.summary,
+      status: SAMPLE_JIRA_BODY.issues[1].fields.status.name,
+      estimation: 8,
+      url: 'https://jira.example.com/browse/JIRA-1234'
+    }])
   }
 
   describe('_buildQuery', function () {
@@ -90,7 +110,7 @@ describe('Issues', function () {
     var requestOpts
     beforeEach(function () {
       requestOpts = {
-        uri: 'https://' + issues.host + '/rest/agile/latest/board/1/issue',
+        uri: issues.host + '/rest/agile/latest/board/1/issue',
         auth: {
           user: issues.user,
           password: issues.password
@@ -114,7 +134,7 @@ describe('Issues', function () {
         statusCode: 200
       }, SAMPLE_JIRA_BODY)
       r.expects('get').withArgs({
-        uri: 'https://' + issues.host + '/rest/agile/latest/issue/JIRA-1111/estimation',
+        uri: issues.host + '/rest/agile/latest/issue/JIRA-1111/estimation',
         auth: {
           user: issues.user,
           password: issues.password
@@ -127,7 +147,7 @@ describe('Issues', function () {
         value: 13
       })
       r.expects('get').withArgs({
-        uri: 'https://' + issues.host + '/rest/agile/latest/issue/JIRA-1234/estimation',
+        uri: issues.host + '/rest/agile/latest/issue/JIRA-1234/estimation',
         auth: {
           user: issues.user,
           password: issues.password
@@ -143,23 +163,7 @@ describe('Issues', function () {
       issues.search('Story', '1', '42', function (err, issues) {
         should.not.exist(err)
 
-        issues.should.eql([{
-          name: SAMPLE_JIRA_BODY.issues[0].fields.issuetype.name,
-          key: SAMPLE_JIRA_BODY.issues[0].key,
-          priority: SAMPLE_JIRA_BODY.issues[0].fields.priority.name,
-          summary: SAMPLE_JIRA_BODY.issues[0].fields.summary,
-          status: SAMPLE_JIRA_BODY.issues[0].fields.status.name,
-          estimation: 13,
-          url: 'https://jira.example.com/browse/JIRA-1111'
-        }, {
-          name: SAMPLE_JIRA_BODY.issues[1].fields.issuetype.name,
-          key: SAMPLE_JIRA_BODY.issues[1].key,
-          priority: SAMPLE_JIRA_BODY.issues[1].fields.priority.name,
-          summary: SAMPLE_JIRA_BODY.issues[1].fields.summary,
-          status: SAMPLE_JIRA_BODY.issues[1].fields.status.name,
-          estimation: 8,
-          url: 'https://jira.example.com/browse/JIRA-1234'
-        }])
+        verifyIssues(issues)
         verifyAll()
         done()
       })
@@ -209,6 +213,52 @@ describe('Issues', function () {
       issues.get(req, res)
       verifyAll()
       done()
+    })
+    it('responds with Bugs given jql query param', function (done) {
+      var req = {
+        query: {
+          jql: 'issueType = Bug'
+        }
+      }
+      var s = [{
+        name: 'foo'
+      }, {
+        name: 'bar'
+      }]
+      _issues.expects('filter').withArgs('issueType = Bug').yields(null, s)
+      issues.get(req, res)
+      verifyAll()
+      done()
+    })
+  })
+
+  describe('filter', function (done) {
+    var requestOpts
+    beforeEach(function () {
+      requestOpts = {
+        uri: issues.host + '/rest/api/latest/search',
+        auth: {
+          user: issues.user,
+          password: issues.password
+        },
+        qs: {
+          jql: "issueType = Bug"
+        },
+        json: true
+      }
+    })
+
+    it('responds with issues', function (done) {
+      r.expects('get').withArgs(requestOpts).yields(null, {
+        statusCode: 200
+      }, SAMPLE_JIRA_BODY)
+
+      issues.filter('issueType = Bug', function (err, issues) {
+        should.not.exist(err)
+        verifyIssues(issues)
+        verifyAll()
+        done()
+      })
     })
   })
 })

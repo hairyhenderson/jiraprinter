@@ -56,7 +56,7 @@ describe('IssueTypes', function () {
     var requestOpts
     beforeEach(function () {
       requestOpts = {
-        uri: 'https://' + issuetypes.host + '/rest/api/latest/issuetype',
+        uri: issuetypes.host + '/rest/api/latest/issuetype',
         auth: {
           user: issuetypes.user,
           password: issuetypes.password

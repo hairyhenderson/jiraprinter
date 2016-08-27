@@ -20,7 +20,9 @@ test-ci:
 	@NODE_ENV=test NODE_PATH=lib XUNIT_FILE=$(CIRCLE_TEST_REPORTS)/mocha.xml \
 	./node_modules/.bin/istanbul cover \
 	./node_modules/mocha/bin/_mocha --report lcovonly -- -R xunit-file
+ifdef CODECLIMATE_REPO_TOKEN
 	./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
+endif
 	cp -av coverage $(CIRCLE_ARTIFACTS)
 
 check-security:

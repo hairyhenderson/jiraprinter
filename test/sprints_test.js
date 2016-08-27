@@ -6,7 +6,7 @@ var should = require('should')
 var SAMPLE_JIRA_BODY = {
   values: [{
     id: 59,
-    self: 'https://qliknext.atlassian.net/rest/agile/1.0/sprint/59',
+    self: 'https://qliknext.atlassian.net/rest/agile/latest/sprint/59',
     state: 'closed',
     name: 'Milestone 14, Beat 4',
     startDate: '2015-09-28T09:00:00.000-05:00',
@@ -15,7 +15,7 @@ var SAMPLE_JIRA_BODY = {
     originBoardId: 1
   }, {
     id: 60,
-    self: 'https://qliknext.atlassian.net/rest/agile/1.0/sprint/60',
+    self: 'https://qliknext.atlassian.net/rest/agile/latest/sprint/60',
     state: 'active',
     name: 'Milestone 14, Beat 5',
     startDate: '2015-10-13T09:26:31.448-05:00',
@@ -23,7 +23,7 @@ var SAMPLE_JIRA_BODY = {
     originBoardId: 1
   }, {
     id: 66,
-    self: 'https://qliknext.atlassian.net/rest/agile/1.0/sprint/66',
+    self: 'https://qliknext.atlassian.net/rest/agile/latest/sprint/66',
     state: 'future',
     name: 'Milestone 15, Beat 1',
     originBoardId: 1
@@ -65,7 +65,7 @@ describe('Sprints', function () {
     var requestOpts
     beforeEach(function () {
       requestOpts = {
-        uri: 'https://' + sprints.host + '/rest/agile/latest/board/1/sprint',
+        uri: sprints.host + '/rest/agile/latest/board/1/sprint',
         auth: {
           user: sprints.user,
           password: sprints.password

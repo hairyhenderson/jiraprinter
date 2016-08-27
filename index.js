@@ -3,6 +3,7 @@ var config = require('commander')
 var express = require('express')
 var IssueTypeRouter = require('./routes/issuetype_router')
 var IssueRouter = require('./routes/issue_router')
+var FilterRouter = require('./routes/filter_router')
 var BoardRouter = require('./routes/board_router')
 var SprintRouter = require('./routes/sprint_router')
 var app = express()
@@ -28,7 +29,11 @@ function validateOpts (config) {
     console.error('ERROR: JIRA hostname required. Use -h/--host, or set $JIRA_HOST')
     errors++
   }
-
+  var regex = /^http[s]?:\/\//
+  if (config.host.match(regex) === null) {
+    console.log('WARN: Defaulting to https:// for %s', config.host)
+    config.host = 'https://' + config.host
+  }
   if (errors) {
     process.exit(errors)
   }
@@ -38,11 +43,13 @@ validateOpts(config)
 
 var issuetypeRouter = new IssueTypeRouter(config, express.Router())
 var issueRouter = new IssueRouter(config, express.Router())
+var filterRouter = new FilterRouter(config, express.Router())
 var boardRouter = new BoardRouter(config, express.Router())
 var sprintRouter = new SprintRouter(config, express.Router())
 
 app.use('/issuetypes', issuetypeRouter.routes())
 app.use('/issues', issueRouter.routes())
+app.use('/filters', filterRouter.routes())
 app.use('/boards', boardRouter.routes())
 app.use('/sprints', sprintRouter.routes())
 
@@ -55,7 +62,7 @@ if (process.env.NODE_ENV !== 'test') {
     var host = server.address().address
     var port = server.address().port
 
-    console.log('jiraprinter listening at http://%s:%s', host, port)
+    console.log('jiraprinter listening at %s:%s', host, port)
   })
 }
 
