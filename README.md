@@ -7,6 +7,7 @@
 [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![Current Version][npm-image]][npm-url]
 [![JS Standard Style][js-standard-image]][js-standard-url]
+[![CII Best Practices][cii-bp-image]][cii-bp-url]
 
 # jiraprinter
 
@@ -98,3 +99,6 @@ Copyright (c) 2015 Dave Henderson
 
 [codecov-image]: https://img.shields.io/codecov/c/github/hairyhenderson/jiraprinter.svg
 [codecov-url]: https://codecov.io/gh/hairyhenderson/jiraprinter
+
+[cii-bp-image]: https://bestpractices.coreinfrastructure.org/projects/338/badge
+[cii-bp-url]: https://bestpractices.coreinfrastructure.org/projects/338
