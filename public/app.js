@@ -8,13 +8,21 @@ var module = angular.module('JiraStoryboard', ['ngResource',
   })
 
 module.controller('ApplicationController', function ($scope, $resource, $window, $localStorage) {
-  $scope.issuetype = 'Story'
   $scope.board = $localStorage.board || ''
+  $scope.filter = $localStorage.filter || ''
 
   var IssueTypes = $resource('/issuetypes/:id')
+  $scope.supported_apis = ['Filters', 'Boards']
+  $scope.apiType = $scope.supported_apis[0]
   $scope.preferred_issuetypes = ['Story', 'Bug']
+  $scope.issuetype = $scope.preferred_issuetypes[0]
   IssueTypes.query(function (issuetypes) {
     $scope.issuetypes = _.difference(issuetypes, $scope.preferred_issuetypes)
+  })
+
+  var Filters = $resource('/filters/:id')
+  Filters.query(function (filters) {
+    $scope.filters = filters
   })
 
   var Boards = $resource('/boards/:id')
@@ -48,11 +56,16 @@ module.controller('ApplicationController', function ($scope, $resource, $window,
     $scope.issues = null
     Issue.query({
       issuetype: $scope.issuetype,
+      jql: $scope.filter.jql,
       board: $scope.board.id,
       sprint: $scope.sprint.id
     }, function (issues) {
       $scope.issues = issues
     })
+  }
+
+  $scope.setApi = function (api) {
+    $scope.apiType = api
   }
 
   $scope.setType = function (type) {
@@ -62,6 +75,13 @@ module.controller('ApplicationController', function ($scope, $resource, $window,
     }
   }
 
+  $scope.setFilter = function (filter) {
+    if ($scope.filter !== filter) {
+      $localStorage.filter = filter
+      $scope.filter = filter
+      $scope.listIssues()
+    }
+  }
   $scope.setBoard = function (board) {
     if ($scope.board !== board) {
       $localStorage.board = board
