@@ -1,5 +1,19 @@
 # Change Log
 
+## [v2.2.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.2.0) (2016-09-26)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v2.1.0...v2.2.0)
+
+**Implemented enhancements:**
+
+- Support JIRA Server editions not just JIRA Cloud [\#77](https://github.com/hairyhenderson/jiraprinter/issues/77)
+- Ability to print out bug cards too! [\#50](https://github.com/hairyhenderson/jiraprinter/issues/50)
+
+**Merged pull requests:**
+
+- Initial support for JIRA /rest/api [\#78](https://github.com/hairyhenderson/jiraprinter/pull/78) ([drmdrew](https://github.com/drmdrew))
+- Displaying 'Bug' in header for bug cards [\#52](https://github.com/hairyhenderson/jiraprinter/pull/52) ([hairyhenderson](https://github.com/hairyhenderson))
+- Upgrading Docker image to Node 5 [\#51](https://github.com/hairyhenderson/jiraprinter/pull/51) ([hairyhenderson](https://github.com/hairyhenderson))
+
 ## [v2.1.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.1.0) (2015-12-23)
 [Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v2.0.0...v2.1.0)
 

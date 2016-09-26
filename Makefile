@@ -29,6 +29,6 @@ check-security:
 	./node_modules/.bin/nsp check
 
 gen-changelog:
-	github_changelog_generator --exclude-labels duplicate,question,invalid,wontfix,admin
+	github_changelog_generator --exclude-labels duplicate,question,invalid,wontfix,admin,greenkeeper
 
 .PHONY: test lint test-cov test-ci gen-changelog
