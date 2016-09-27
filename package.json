@@ -31,7 +31,7 @@
     "codeclimate-test-reporter": "^0.3.0",
     "dot-only-hunter": "^1.0.2",
     "istanbul": "^0.4.0",
-    "mocha": "^3.0.0",
+    "mocha": "^3.1.0",
     "nsp": "^2.2.0",
     "should": "^11.0.0",
     "sinon": "^1.17.2",
