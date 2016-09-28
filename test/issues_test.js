@@ -68,7 +68,7 @@ describe('Issues', function () {
     _issues.verify()
   }
 
-  function verifyIssues(issues) {
+  function verifyIssues (issues) {
     issues.should.eql([{
       name: SAMPLE_JIRA_BODY.issues[0].fields.issuetype.name,
       key: SAMPLE_JIRA_BODY.issues[0].key,
@@ -80,7 +80,7 @@ describe('Issues', function () {
     }, {
       name: SAMPLE_JIRA_BODY.issues[1].fields.issuetype.name,
       key: SAMPLE_JIRA_BODY.issues[1].key,
-    priority: SAMPLE_JIRA_BODY.issues[1].fields.priority.name,
+      priority: SAMPLE_JIRA_BODY.issues[1].fields.priority.name,
       summary: SAMPLE_JIRA_BODY.issues[1].fields.summary,
       status: SAMPLE_JIRA_BODY.issues[1].fields.status.name,
       estimation: 8,
@@ -233,27 +233,24 @@ describe('Issues', function () {
   })
 
   describe('filter', function (done) {
-    var requestOpts
-    beforeEach(function () {
-      requestOpts = {
+    it('responds with issues', function (done) {
+      var requestOpts = {
         uri: issues.host + '/rest/api/latest/search',
         auth: {
           user: issues.user,
           password: issues.password
         },
         qs: {
-          jql: "issueType = Bug"
+          jql: 'issueType = Bug'
         },
         json: true
       }
-    })
 
-    it('responds with issues', function (done) {
       r.expects('get').withArgs(requestOpts).yields(null, {
         statusCode: 200
       }, SAMPLE_JIRA_BODY)
 
-      issues.filter('issueType = Bug', function (err, issues) {
+      issues.filter('issueType = Bug', (err, issues) => {
         should.not.exist(err)
         verifyIssues(issues)
         verifyAll()

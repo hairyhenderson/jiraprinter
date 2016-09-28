@@ -1,4 +1,9 @@
 REPORTER = spec
+
+ifndef CIRCLE_TEST_REPORTS
+CIRCLE_TEST_REPORTS=.
+endif
+
 test:
 	$(MAKE) check-security
 	$(MAKE) lint
@@ -15,7 +20,7 @@ test-cov:
 	./node_modules/mocha/bin/_mocha -- -R spec
 
 test-ci:
-	# no need to check-security here, since it's integrated into codeclimate
+	$(MAKE) check-security
 	$(MAKE) lint
 	@NODE_ENV=test NODE_PATH=lib XUNIT_FILE=$(CIRCLE_TEST_REPORTS)/mocha.xml \
 	./node_modules/.bin/istanbul cover \
@@ -23,7 +28,9 @@ test-ci:
 ifdef CODECLIMATE_REPO_TOKEN
 	./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
 endif
+ifdef CIRCLE_ARTIFACTS
 	cp -av coverage $(CIRCLE_ARTIFACTS)
+endif
 
 check-security:
 	./node_modules/.bin/nsp check
