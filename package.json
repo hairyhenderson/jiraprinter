@@ -28,7 +28,7 @@
     "request": "^2.67.0"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "^0.3.0",
+    "codeclimate-test-reporter": "^0.4.0",
     "dot-only-hunter": "^1.0.2",
     "istanbul": "^0.4.0",
     "mocha": "^3.0.0",
