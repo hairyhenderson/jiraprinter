@@ -45,7 +45,8 @@ describe('Issues', function () {
       type: 'Story',
       user: 'joe',
       password: 'foo',
-      host: 'https://jira.example.com'
+      host: 'https://jira.example.com',
+      fieldOverrides: []
     })
     _issues = sinon.mock(issues)
     res = {

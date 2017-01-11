@@ -4,55 +4,8 @@
     <meta charset="utf-8">
     <title>jiraprinter</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      .points {
-        color: rgb(128, 128, 128);
-      }
-      .Bug-type {
-        color: rgb(192, 0, 0);
-      }
-    </style>
-    <style media="print">
-      html, body { height: 100%; float:none; font-size: 44pt;}
-      .panel-title { color: black; font-size: 72pt; }
-      body { overflow: visible; }
-      .col-print-1 {width:8%; float:none; }
-      .col-print-2 {width:16%; float:none;}
-      .col-print-3 {width:25%; float:none;}
-      .col-print-4 {width:33%; float:none;}
-      .col-print-5 {width:42%; float:none;}
-      .col-print-6 {width:50%; float:none;}
-      .col-print-7 {width:58%; float:none;}
-      .col-print-8 {width:66%; float:none;}
-      .col-print-9 {width:75%; float:none;}
-      .col-print-10{width:83%; float:none;}
-      .col-print-11{width:92%; float:none;}
-      .col-print-12{width:98%; float:none;}
-      .panel-body { height: 345pt; }
-      .panel { border-color: black; border-width: 4pt;
-        border-top-left-radius: 24pt;
-        border-top-right-radius: 24pt;
-        border-bottom-left-radius: 24pt;
-        border-bottom-right-radius: 24pt;
-      }
-      .panel-heading {
-        border-color: black !important;
-        border-bottom-width: 4pt;
-        border-top-left-radius: 23pt;
-        border-top-right-radius: 23pt;
-        background-color: rgb(245, 245, 245) !important;
-      }
-      .panel-footer {
-        font-size: 48pt;
-        color: rgb(128, 128, 128);
-        border-color: black;
-        border-top-width: 4pt;
-        border-bottom-left-radius: 23pt;
-        border-bottom-right-radius: 23pt;
-        background-color: rgb(245, 245, 245) !important;
-      }
-      .odd { page-break-before: always; }
-    </style>
+    <link href="style.css" rel="stylesheet" />
+    <link href="style.print.css" rel="stylesheet" media="print" content="width=device-width, initial-scale=1.0" />
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.min.js" type="text/javascript"></script>
@@ -141,11 +94,10 @@
           <div ng-hide="!!issues" class="col-xs-12 col-md-offset-3 col-md-6 alert alert-info">
             Loading...
           </div>
-          <div ng-repeat="issue in issues" class="col-xs-12 col-md-6 col-print-12">
+          <div ng-repeat="issue in issues" class="issue col-xs-12 col-md-6 col-print-6">
             <div class="panel panel-default" ng-class-odd="'odd'" ng-class-even="'even'">
               <div class="panel-heading">
-                  <h3 class="panel-title"><img class="visible-print-inline" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&format=svg&data={{issue.url}}"/> {{ issue.key }} <div ng-hide="!issue.estimation" class="points pull-right">{{ issue.estimation }} <span class="hidden-print">points</span></div>
-                    <div ng-show="issue.name === 'Bug'" ng-class="issue.name + '-type'" class="pull-right">{{ issue.name }}</div>
+                  <h3 class="panel-title"><img class="visible-print-inline" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&format=svg&data={{issue.url}}" ng-show="configs.printQR" />{{ issue.key }} <div ng-hide="!issue.estimation" class="points pull-right">{{ issue.estimation }} <span class="hidden-print">points</span></div>
                   </h3>
               </div>
               <div class="panel-body">
@@ -153,6 +105,7 @@
               </div>
               <div class="panel-footer">
                 {{ issue.priority }}
+                <div ng-show="issue.name === 'Bug'" ng-class="issue.name + '-type'" class="pull-right">{{ issue.name }}</div>
               </div>
             </div>
           </div>

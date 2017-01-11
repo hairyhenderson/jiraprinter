@@ -1,0 +1,57 @@
+@media print {
+    @page {
+        size: landscape;
+    }
+}
+
+html, body {
+    height: 100%;
+    float: none;
+    font-size: 1.5em;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    border-color: black;
+    border-width: 4pt;
+    border-top-left-radius: 24pt;
+    border-top-right-radius: 24pt;
+    border-bottom-left-radius: 24pt;
+    border-bottom-right-radius: 24pt;
+    height: 3.8in;
+}
+
+.panel-heading {
+    border-color: black !important;
+    border-bottom-width: 4pt;
+    border-top-left-radius: 23pt;
+    border-top-right-radius: 23pt;
+    background-color: rgb(245, 245, 245) !important;
+}
+
+.panel-title {
+    color: black;
+    font-size: 36pt;
+}
+
+.panel-body {
+    flex-grow:3;
+    font-size: 26pt;
+    font-weight: lighter;
+    overflow: hidden;
+}
+
+.panel-footer {
+    font-size: 30pt;
+    border-color: black;
+    border-top-width: 4pt;
+    border-bottom-left-radius: 23pt;
+    border-bottom-right-radius: 23pt;
+    background-color: rgb(245, 245, 245) !important;
+}
+
+.col-print-6 {
+    width: 50%;
+    page-break-inside: avoid;
+}

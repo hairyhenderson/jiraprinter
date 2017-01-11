@@ -7,9 +7,17 @@ var module = angular.module('JiraStoryboard', ['ngResource',
     $localStorageProvider.setKeyPrefix('jiraprinter-')
   })
 
-module.controller('ApplicationController', function ($scope, $resource, $window, $localStorage) {
+module.controller('ApplicationController', function ($scope, $resource, $window, $localStorage, $http) {
   $scope.board = $localStorage.board || ''
   $scope.filter = $localStorage.filter || ''
+
+  $scope.getConfigs = function () {
+    $http.get('/configs').then(function (response) {
+      $scope.configs = {
+        printQR: response.data.printQR
+      }
+    })
+  }
 
   var IssueTypes = $resource('/issuetypes/:id')
   $scope.supported_apis = ['Filters', 'Boards']
@@ -99,6 +107,7 @@ module.controller('ApplicationController', function ($scope, $resource, $window,
     }
   }
 
+  $scope.getConfigs()
   $scope.listSprints()
   $scope.listIssues()
 })

@@ -51,11 +51,13 @@ $ jiraprinter --help
 
   Options:
 
-    -h, --help               output usage information
-    -V, --version            output the version number
-    -u, --user [username]    The JIRA username ($JIRA_USER)
-    --password [password]    The JIRA password ($JIRA_PASS)
-    -h, --host [host]        The JIRA hostname ($JIRA_HOST)
+    -h, --help                                  output usage information
+    -V, --version                               output the version number
+    -u, --user [username]                       The JIRA username ($JIRA_USER)
+    --password [password]                       The JIRA password ($JIRA_PASS)
+    -h, --host [host]                           The JIRA hostname ($JIRA_HOST)
+    --printQR [printQR]                         Whether to include an issue link QR code in the print out ($PRINT_QR) - defaults to true
+    -f, --fieldOverrides [fieldOverrides]       Comma (,) seperated list of fields to replace with custom field names (e.g. "-f estimation:fields.customfield_1,name:fields.custom_field2")
 $ jiraprinter -h myjira.example.com -u me
 ```
 
