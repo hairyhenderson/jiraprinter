@@ -1,8 +1,8 @@
 /* globals _ */
 var module = angular.module('JiraStoryboard', ['ngResource',
-    'ui.bootstrap',
-    'ngStorage'
-  ])
+  'ui.bootstrap',
+  'ngStorage'
+])
   .config(function ($localStorageProvider) {
     $localStorageProvider.setKeyPrefix('jiraprinter-')
   })
