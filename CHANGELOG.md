@@ -1,5 +1,19 @@
 # Change Log
 
+## [v2.3.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.3.0) (2017-01-29)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v2.2.0...v2.3.0)
+
+**Closed issues:**
+
+- Address issues found in test/issues\_test.js \[Opened by bitHound\] [\#83](https://github.com/hairyhenderson/jiraprinter/issues/83)
+
+**Merged pull requests:**
+
+- Fixing indentation so standard 8.6 stops complaining [\#91](https://github.com/hairyhenderson/jiraprinter/pull/91) ([hairyhenderson](https://github.com/hairyhenderson))
+- Styling improvements and add ability to specify custom fields for issues [\#88](https://github.com/hairyhenderson/jiraprinter/pull/88) ([dotLou](https://github.com/dotLou))
+- Fixing some linting complaints [\#84](https://github.com/hairyhenderson/jiraprinter/pull/84) ([hairyhenderson](https://github.com/hairyhenderson))
+- Simplify the Dockerfile, and upgrade to Node 6 [\#82](https://github.com/hairyhenderson/jiraprinter/pull/82) ([hairyhenderson](https://github.com/hairyhenderson))
+
 ## [v2.2.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.2.0) (2016-09-26)
 [Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v2.1.0...v2.2.0)
 
