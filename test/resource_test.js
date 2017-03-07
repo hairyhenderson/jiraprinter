@@ -30,7 +30,7 @@ describe('Resource', function () {
     it('errors when JIRA connection fails', function (done) {
       resource._handleResponse('ERROR', null, null, function (err, body) {
         err.should.eql('ERROR')
-        should(body).not.exist
+        should.not.exist(body)
         done()
       })
     })
@@ -55,7 +55,7 @@ describe('Resource', function () {
 
   describe('_getHandler', function () {
     it('returns a function', function (done) {
-      resource._getHandler.should.be.a.function
+      resource._getHandler.should.be.a.Function()
       done()
     })
     describe('handler', function () {
