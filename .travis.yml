@@ -1,0 +1,11 @@
+sudo: false
+language: node_js
+node_js:
+  - 0.10
+  - 0.12
+  - 4
+  - 5
+notifications:
+  email: false
+  slack:
+    secure: Ebs09O/z4GQHIm9VvfrTCpx4sFFVXAFmFMn8lOHCEwHn3GnDxebQNkosOep++xw58BQ15ecTUrdromZ2Q6VP1kKYiupkYjHHF/c1uJUhX9j2btxiU9lKu+l7SvkP5Epzk3OtLVRvzkJEg0I7IWlWvjKGyYQm2uycIOz+tTh9d3M=
