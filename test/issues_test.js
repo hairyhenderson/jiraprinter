@@ -30,7 +30,10 @@ var SAMPLE_JIRA_BODY = {
       summary: 'As a user, I want to do something major',
       status: {
         name: 'In Progress'
-      }
+      },
+      components: [
+        'some-component'
+      ]
     }
   }]
 }
@@ -76,6 +79,7 @@ describe('Issues', function () {
       priority: SAMPLE_JIRA_BODY.issues[0].fields.priority.name,
       summary: SAMPLE_JIRA_BODY.issues[0].fields.summary,
       status: SAMPLE_JIRA_BODY.issues[0].fields.status.name,
+      components: SAMPLE_JIRA_BODY.issues[0].fields.components,
       estimation: 13,
       url: 'https://jira.example.com/browse/JIRA-1111'
     }, {
@@ -84,6 +88,7 @@ describe('Issues', function () {
       priority: SAMPLE_JIRA_BODY.issues[1].fields.priority.name,
       summary: SAMPLE_JIRA_BODY.issues[1].fields.summary,
       status: SAMPLE_JIRA_BODY.issues[1].fields.status.name,
+      components: SAMPLE_JIRA_BODY.issues[1].fields.components,
       estimation: 8,
       url: 'https://jira.example.com/browse/JIRA-1234'
     }])
