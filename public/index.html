@@ -97,7 +97,7 @@
           <div ng-repeat="issue in issues" class="issue col-xs-12 col-md-6 col-print-6">
             <div class="panel panel-default" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="issue.name">
               <div class="panel-heading" ng-class="issue.name">
-                <span ng-class="issue.name + '-type'" ng-class="issue.name" class="pull-left">{{ issue.name[0] }}</span>
+                <span ng-class="issue.name + '-type'" ng-class="issue.name" class="pull-left issue-type-character">{{ issue.name[0] }}</span>
                 <span class="priority pull-left" ng-class="'priority-' + issue.priority" ng-show="issue.name === 'Bug'">
                     {{ issue.priority }}
                   </span>
