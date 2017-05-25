@@ -49,6 +49,13 @@ describe('Boards', function () {
   }
 
   describe('board', function () {
+    function validateBoards (err, boards, expectedBoards, done) {
+      should.not.exist(err)
+
+      boards.should.eql(expectedBoards)
+      verifyAll()
+      done()
+    }
     var requestOpts
     beforeEach(function () {
       requestOpts = {
@@ -67,11 +74,7 @@ describe('Boards', function () {
       }, SAMPLE_JIRA_BODY)
 
       boards.board(function (err, boards) {
-        should.not.exist(err)
-
-        boards.should.eql(SAMPLE_JIRA_BODY.values)
-        verifyAll()
-        done()
+        validateBoards(err, boards, SAMPLE_JIRA_BODY.values, done)
       })
     })
 
@@ -98,11 +101,7 @@ describe('Boards', function () {
       }, SAMPLE_JIRA_BODY)
 
       boards.board(function (err, boards) {
-        should.not.exist(err)
-
-        boards.should.eql(SAMPLE_JIRA_BODY.values)
-        verifyAll()
-        done()
+        validateBoards(err, boards, SAMPLE_JIRA_BODY.values, done)
       })
     })
   })
