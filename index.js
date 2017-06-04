@@ -16,6 +16,7 @@ config
   .option('-h, --host [host]', 'The JIRA hostname ($JIRA_HOST)', process.env.JIRA_HOST)
   .option('--printQR [printQR]', 'Whether to include an issue link QR code in the print out - defaults to true', process.env.PRINT_QR)
   .option('-f, --fieldOverrides [fieldOverrides]', 'Comma (,) seperated list of fields to replace with custom field names (e.g. "-f estimation:fields.customfield_1,name:fields.custom_field2")', process.env.FIELD_OVERRIDES)
+  .option('--boardName [boardName]', 'Filter boards by name', process.env.BOARD_NAME)
   .parse(process.argv)
 
 function validateOpts (config) {

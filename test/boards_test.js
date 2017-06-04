@@ -49,6 +49,13 @@ describe('Boards', function () {
   }
 
   describe('board', function () {
+    function validateBoards (err, boards, expectedBoards, done) {
+      should.not.exist(err)
+
+      boards.should.eql(expectedBoards)
+      verifyAll()
+      done()
+    }
     var requestOpts
     beforeEach(function () {
       requestOpts = {
@@ -67,11 +74,34 @@ describe('Boards', function () {
       }, SAMPLE_JIRA_BODY)
 
       boards.board(function (err, boards) {
-        should.not.exist(err)
+        validateBoards(err, boards, SAMPLE_JIRA_BODY.values, done)
+      })
+    })
 
-        boards.should.eql(SAMPLE_JIRA_BODY.values)
-        verifyAll()
-        done()
+    it('yields JIRA board results and calls API with name query param when boardName config exists', function (done) {
+      var config = {
+        user: 'joe',
+        password: 'foo',
+        host: 'https://jira.example.com',
+        boardName: 'Some Board'
+      }
+      boards = new Boards(config)
+      _boards = sinon.mock(boards)
+      requestOpts = {
+        uri: boards.host + '/rest/agile/latest/board?name=' + config.boardName,
+        auth: {
+          user: boards.user,
+          password: boards.password
+        },
+        json: true
+      }
+
+      r.expects('get').withArgs(requestOpts).yields(null, {
+        statusCode: 200
+      }, SAMPLE_JIRA_BODY)
+
+      boards.board(function (err, boards) {
+        validateBoards(err, boards, SAMPLE_JIRA_BODY.values, done)
       })
     })
   })
