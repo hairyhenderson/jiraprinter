@@ -42,12 +42,10 @@ describe('Resource', function () {
           uri: 'the_uri'
         }
       }, 'not found', function (err) {
-        err.should.eql({
-          message: 'got status 404 while GETing to the_uri',
-          method: 'GET',
-          statusCode: 404,
-          body: 'not found'
-        })
+        err.message.should.eql('got status 404 while GETing to the_uri')
+        err.method.should.eql('GET')
+        err.statusCode.should.eql(404)
+        err.body.should.eql('not found')
         done()
       })
     })
