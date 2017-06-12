@@ -1,6 +1,19 @@
 # Change Log
 
-## [v2.3.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.3.0) (2017-01-29)
+## [v2.4.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.4.0) (2017-06-12)
+[Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v2.3.0...v2.4.0)
+
+**Implemented enhancements:**
+
+- Update sample card to match new style [\#101](https://github.com/hairyhenderson/jiraprinter/pull/101) ([dotLou](https://github.com/dotLou))
+- New Print style for cards [\#100](https://github.com/hairyhenderson/jiraprinter/pull/100) ([dotLou](https://github.com/dotLou))
+- Add boardName filter param and env var [\#99](https://github.com/hairyhenderson/jiraprinter/pull/99) ([dotLou](https://github.com/dotLou))
+
+**Merged pull requests:**
+
+- chore\(package\): update standard to version 9.0.0 [\#96](https://github.com/hairyhenderson/jiraprinter/pull/96) ([hairyhenderson](https://github.com/hairyhenderson))
+
+## [v2.3.0](https://github.com/hairyhenderson/jiraprinter/tree/v2.3.0) (2017-02-24)
 [Full Changelog](https://github.com/hairyhenderson/jiraprinter/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
