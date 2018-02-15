@@ -32,7 +32,7 @@
     "dot-only-hunter": "^1.0.2",
     "istanbul": "^0.4.0",
     "mocha": "^3.0.0",
-    "nsp": "^3.0.0",
+    "nsp": "^3.2.1",
     "should": "^13.0.1",
     "sinon": "^4.0.0",
     "standard": "^10.0.0",
