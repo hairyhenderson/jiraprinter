@@ -21,7 +21,7 @@
   "author": "Dave Henderson",
   "license": "MIT",
   "dependencies": {
-    "async": "^2.0.0",
+    "async": "^3.0.1",
     "commander": "^2.9.0",
     "express": "^4.13.3",
     "lodash": "^4.0.0",
