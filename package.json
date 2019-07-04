@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "make test-ci"
+    "test": "make test-ci",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "jiraprinter": "./index.js"
@@ -25,7 +27,8 @@
     "commander": "^2.9.0",
     "express": "^4.13.3",
     "lodash": "^4.0.0",
-    "request": "^2.67.0"
+    "request": "^2.67.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.5.0",
@@ -51,5 +54,6 @@
   },
   "engines": {
     "node": ">=6"
-  }
+  },
+  "snyk": true
 }
